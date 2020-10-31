@@ -31,6 +31,7 @@
     <link href="css/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.countdown.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/adapter.css" rel="stylesheet" type="text/css" />
 
     <!-- color scheme -->
     <link
@@ -54,7 +55,7 @@
                   <!-- logo begin -->
                   <!-- logo begin -->
                   <div id="logo">
-                    <a href="hybroo.html">
+                    <a href="index.php">
                       <img alt="" src="images/logo-1.png" />
                     </a>
                   </div>
@@ -65,7 +66,7 @@
                   <!-- mainmenu begin -->
                   <ul id="mainmenu">
                     <li>
-                      <a href="hybroo.html">Home</a>
+                      <a href="index.php">Home</a>
                       <!-- <ul>
                                                 <li><a href="index.html">Main</a></li>
                                                 <li><a href="index-startup.html">Startup</a></li>
@@ -110,28 +111,78 @@
           data-bgimage="url(images/background/1.png) bottom"
           class="full-height vertical-center"
         >
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
-                <h4>Calcule respostas no</h4>
-                <div class="spacer-10"></div>
-                <h1>
-                  <span class="id-color"><strong>HYBROO</strong></span>
-                </h1>
-                <p class="lead">
-                  em nível de especialista usando nossos algoritmos, base de
-                  conhecimento e tecnologia de IA.
-                </p>
-                <div class="spacer-20"></div>
-                <a class="btn-custom" href="#">Ler Mais</a>
-                <div class="mb-sm-30"></div>
-              </div>
-
+          <div class="container col align-self-start" id="container-options">
+            <div class="col-md-12 wow fadeInUp" data-wow-delay="0s">
               <div
-                class="col-lg-6 offset-lg-1 wow fadeInLeft"
-                data-wow-delay=".5s"
+                class="padding40 pb0 box-rounded card-border"
+                data-bgcolor="#ffffff"
               >
-                <img src="images/misc/1.png" class="img-fluid" alt="" />
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="skill-bar style-2">
+                      <h5 class="pb-3">Selecione o tipo de problema</h5>
+                      <input type="radio" id="age1" name="age" value="30" />
+                      <label class="lead" for="age1">VRP</label><br />
+                      <input type="radio" id="age1" name="age" value="30" />
+                      <label class="lead" for="age1">TSP</label><br />
+                      <h5 class="py-3">Instância</h5>
+                      <!-- <div class="de-progress">
+                        <div class="value"></div>
+                        <div class="progress-bar" data-value="80%"></div>
+                      </div> -->
+                    </div>
+
+                    <!-- <div class="skill-bar style-2">
+                      <h5>Branding</h5>
+                      <div class="de-progress">
+                        <div class="value"></div>
+                        <div class="progress-bar" data-value="70%"></div>
+                      </div>
+                    </div> -->
+                  </div>
+
+                  <!-- <div class="col-md-4">
+                              <div class="skill-bar style-2">
+                                  <h5>Marketing</h5>
+                                  <div class="de-progress">
+                                      <div class="value"></div>
+                                      <div class="progress-bar" data-value="70%">
+                                      </div>
+                                  </div>
+                              </div>
+  
+                              <div class="skill-bar style-2">
+                                  <h5>Development</h5>
+                                  <div class="de-progress">
+                                      <div class="value"></div>
+                                      <div class="progress-bar" data-value="90%">
+                                      </div>
+                                  </div>
+                              </div>
+  
+                          </div>
+  
+                          <div class="col-md-4">
+                              <div class="skill-bar style-2">
+                                  <h5>Photography</h5>
+                                  <div class="de-progress">
+                                      <div class="value"></div>
+                                      <div class="progress-bar" data-value="90%">
+                                      </div>
+                                  </div>
+                              </div>
+  
+                              <div class="skill-bar style-2">
+                                  <h5>SEO</h5>
+                                  <div class="de-progress">
+                                      <div class="value"></div>
+                                      <div class="progress-bar" data-value="75%">
+                                      </div>
+                                  </div>
+                              </div>
+  
+                          </div> -->
+                </div>
               </div>
             </div>
           </div>
@@ -145,7 +196,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="widget">
-                <a href="hybroo.html"
+                <a href="index.php"
                   ><img alt="" class="logo" src="images/logo-1.png"
                 /></a>
                 <div class="spacer-20"></div>
