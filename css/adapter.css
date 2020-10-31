@@ -1,0 +1,9 @@
+#container-options {
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+.card-border {
+  border-style: solid;
+  border-color: rgba(161, 161, 161, 0.2);
+}
