@@ -557,6 +557,10 @@ header .header-col.mid .social-icons{
 	margin-left:0%;
 }
 .header-light #mainmenu>li>a {
+	color: #fff;
+	font-weight:600;
+}
+.header-light-black #mainmenu>li>a {
 	color: #222;
 	font-weight:600;
 }
@@ -9865,7 +9869,7 @@ a, img {
 	header.header-mobile-sticky {
 		position: fixed;
 	}
-	#subheader, {
+	#subheader {
 		padding: 0 0 0 0;
 	}
 	.de-navbar-left #subheader {

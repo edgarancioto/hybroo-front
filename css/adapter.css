@@ -7,3 +7,11 @@
   border-style: solid;
   border-color: rgba(161, 161, 161, 0.2);
 }
+
+.max-1000 {
+  max-width: 1400px;
+}
+.op {
+  margin-left: auto;
+  margin-right: auto;
+}
