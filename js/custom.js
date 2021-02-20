@@ -30,15 +30,13 @@ function getDetails() {
 
             detailsLabels = Object.keys(detailsSelected)
 
-            $("#list-label").append('<li class="font-weight-bold">Function</li>');
-            $("#list-value").append('<li>' + labelSelected + '</li>');
-
             for (var i in detailsLabels) {
-                $("#list-label").append('<li class="font-weight-bold capitalize">' + detailsLabels[i] + '</li>');
-            }
-
-            for (var i in detailsSelected) {
-                $("#list-value").append('<li class="text-truncate">' + detailsSelected[i] + '</li>');
+                $("#list").append(`
+                    <tr>
+                        <td class="font-weight-bold capitalize pr-3 vertical-top">${detailsLabels[i]}</td>
+                        <td class="vertical-top" >${detailsSelected[detailsLabels[i]]}</td>
+                    </tr>
+                `);
             }
         })
         .catch(function (error) {
@@ -62,8 +60,7 @@ function cleanForm() {
     $('#second-container').css('display', 'none')
     $("#function_selected").val(0)
     $("#btn_next").prop("disabled", true);
-    $("#list-label").empty();
-    $("#list-value").empty();
+    $("#list").empty();
 }
 
 // Habilita botão após escolha no select input

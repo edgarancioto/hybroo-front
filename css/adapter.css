@@ -24,3 +24,7 @@
   object-fit: fill;
   min-height: max-content;
 }
+
+.vertical-top {
+  vertical-align: text-top;
+}
