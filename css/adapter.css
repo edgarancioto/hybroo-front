@@ -15,3 +15,12 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.image-functions-problems {
+  object-fit: fill;
+  min-height: max-content;
+}
