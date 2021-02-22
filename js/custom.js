@@ -19,7 +19,7 @@ function callApi() {
 }
 
 function getDetails() {
-    axios.get('http://hybroo2.herokuapp.com/functions-details?id=' + valueSelected)
+    axios.get('https://hybroo2.herokuapp.com/functions-details?id=' + valueSelected)
         .then(function (response) {
             getImage();
 
