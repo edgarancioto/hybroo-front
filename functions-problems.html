@@ -90,7 +90,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12 d-flex justify-content-end">
-                  <input id="btn_next" onclick="getDetails()" value="Próximo" disabled
+                  <input id="btn_next_1" onclick="getDetails()" value="Próximo" name="-ignore-" disabled
                     class="btn btn-custom btn color-2" />
                 </div>
               </div>
@@ -120,7 +120,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 d-flex justify-content-end">
-                <input type="submit" id="send_message" value="Próximo" onclick="switchThird()"
+                <input type="submit" id="btn_next_2" name="-ignore-" value="Próximo" onclick="switchThird()"
                   class="btn btn-custom btn color-2" />
               </div>
             </div>
@@ -133,41 +133,46 @@
               <div class="col-md-6">
                 <div class="field-set">
                   <label>Inform the number of dimensions to execute the function</label>
-                  <input type='number' name='name' value='5' id='name' class="form-control" placeholder="">
+                  <input type='number' id='dimensions' name='dimensions' value='5' class="form-control" placeholder="">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="switch-set px-3 text-center">
                   <div class="spacer-20 mt-2"></div>
                   <div>SINGLE</div>
-                  <div><input id="single-or-hybrid-switch" class="switch" type="checkbox" /></div>
+                  <div><input id="single-or-hybrid-switch" name="method-is-single" class="switch" type="checkbox" />
+                  </div>
                   <div>HYBRID</div>
                 </div>
               </div>
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
-                <div class="field-set">
-                  <label>Methods Singles</label>
-                  <select class="form-control" id="method_single">
-                    <option disabled="" selected="" value="0">
-                      - Selecione uma opção -
-                    </option>
-                  </select>
-                </div>
-                <div class="field-set" id="fields-of-methods-single">
+                <div id="group-first-method">
+                  <div class="field-set">
+                    <label>First Method</label>
+                    <select class="form-control" name="first-method" id="method_single">
+                      <option disabled="" selected="" value="0">
+                        - Selecione uma opção -
+                      </option>
+                    </select>
+                  </div>
+                  <div class="field-set" id="fields-of-methods-single">
+                  </div>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="field-set">
-                  <label id="method_hybrid_label" style="display: none">Methods Hybrids</label>
-                  <select class="form-control" id="method_hybrid" style="display: none">
-                    <option disabled="" selected="" value="0">
-                      - Selecione uma opção -
-                    </option>
-                  </select>
-                </div>
-                <div class="field-set" id="fields-of-methods-hybrid">
+                <div id="group-second-method">
+                  <div class="field-set">
+                    <label id="method_hybrid_label" style="display: none">Second Method</label>
+                    <select class="form-control" name="second-method" id="method_hybrid" style="display: none">
+                      <option disabled="" selected="" value="0">
+                        - Selecione uma opção -
+                      </option>
+                    </select>
+                  </div>
+                  <div class="field-set" id="fields-of-methods-hybrid">
+                  </div>
                 </div>
               </div>
             </div>
@@ -175,8 +180,8 @@
             <form class="form-border">
               <div class="row pt-3">
                 <div class="col-md-12 d-flex justify-content-end">
-                  <input id="btn_next_2" onclick="getDetails()" value="Próximo" disabled
-                    class="btn btn-custom btn color-2" />
+                  <input id="btn_next_3" onclick="sendData()" value="Calcular" class="btn btn-custom btn color-2"
+                    disabled name="-ignore-" />
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -208,7 +213,7 @@
               </p>
               <form action="blank.php" class="row" id="form_subscribe" method="post" name="form_subscribe">
                 <div class="col text-center">
-                  <input class="form-control" id="name_1" name="name_1" placeholder="Digite seu e-mail" type="text" />
+                  <input class="form-control" id="name_1" name="-ignore-" placeholder="Digite seu e-mail" type="text" />
                   <a href="#" id="btn-submit"><i class="arrow_right"></i></a>
                   <div class="clearfix"></div>
                 </div>

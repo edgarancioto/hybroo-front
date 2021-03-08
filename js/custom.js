@@ -8,7 +8,10 @@ let detailsSelected;
 var detailsLabels;
 
 var BASE_URL_API = "https://hybroo2.herokuapp.com/"
+var collectionData = {} // Guarda os valores pra ser enviados
 
+var firstMethod = []
+var secondMethod = []
 
 // Escuta o checkbox "Single x Hybrid"
 $('#single-or-hybrid-switch').change(function () {
@@ -39,7 +42,7 @@ $('#method_single').change(function () {
     // Cria os inputs na tela
     methodSelecionado[1].fields.forEach(function (item) {
         $('#fields-of-methods-single').append(`<label>${item.label}</label>
-        <input type=${item.type} name='name' step=${item.step} value=${item.default} min=${item.min} id='name' class="form-control" placeholder="">`);
+        <input type=${item.type} name=${item.label} step=${item.step} value=${item.default} min=${item.min} class="form-control" placeholder="">`);
     });
 });
 
@@ -58,7 +61,7 @@ $('#method_hybrid').change(function () {
     // Cria os inputs na tela
     methodSelecionado[1].fields.forEach(function (item) {
         $('#fields-of-methods-hybrid').append(`<label>${item.label}</label>
-        <input type=${item.type} name='name' value=${item.default} min=${item.min} id='name' class="form-control" placeholder="">`);
+        <input type=${item.type} name=${item.label} value=${item.default} min=${item.min} class="form-control" placeholder="">`);
     });
 });
 
@@ -100,6 +103,34 @@ function getDetails() {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+function sendData() {
+    $("div#group-first-method :input").each(function () {
+        let input = $(this);
+        let label = input[0].name
+        let value = input[0].value
+        let element = { label, value }
+
+        firstMethod.push(element)
+    });
+
+    $("div#group-second-method :input").each(function () {
+        let input = $(this);
+        let label = input[0].name
+        let value = input[0].value
+        let element = { label, value }
+
+        secondMethod.push(element)
+    });
+
+    collectionData.problem = $('#function_selected').val()
+    collectionData.dimension = $('#dimensions').val()
+    collectionData.isHybrid = $('#single-or-hybrid-switch').is(":checked")
+    collectionData.firstMethod = firstMethod
+    collectionData.secondMethod = secondMethod
+
+    console.log(collectionData)
 }
 
 // Popula select input com valores retornados da API
@@ -154,13 +185,13 @@ function cleanForm() {
     $('#second-container').css('display', 'none')
     $('#third-container').css('display', 'none')
     $("#function_selected").val(0)
-    $("#btn_next").prop("disabled", true);
+    $("#btn_next_1").prop("disabled", true);
     $("#list").empty();
 }
 
 // Habilita botão após escolha no select input
 $('#function_selected').on('change', function () {
-    $("#btn_next").prop("disabled", false);
+    $("#btn_next_1").prop("disabled", false);
     valueSelected = this.value;
     labelSelected = $(this).find('option').filter(':selected').text();
 });
@@ -171,3 +202,18 @@ $('#function_selected').on('change', function () {
 function jsonToArray(obj) {
     return Object.keys(obj).map((key) => [key, obj[key]]);
 }
+
+// :::::::::::::::::::::: Resets :::::::::::::::::::::: 
+$('#method_single').on('change', function () {
+    $("#btn_next_3").prop("disabled", false);
+    firstMethod = []
+})
+
+$('#method_hybrid').on('change', function () {
+    secondMethod = []
+})
+
+
+
+
+
