@@ -48,9 +48,11 @@ socket.addEventListener('message', function (event) {
             functionMethod = jsonToArray(xsd)
             break;
 
-        // case "functions_solver":
-        //     console.log(event.data)
-        //     break;
+        case "functions_solver":
+            const rfs = JSON.parse(event.data)
+            console.log(rfs.data)
+            alert(rfs.data)
+            break;
 
         default:
             break;
