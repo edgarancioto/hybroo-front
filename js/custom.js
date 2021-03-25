@@ -1,4 +1,4 @@
-const socket = new WebSocket('ws://hybroo2.herokuapp.com/0.0.0.0'); // Local: "ws://localhost:5000"
+const socket = new WebSocket('wss://hybroo2.herokuapp.com/0.0.0.0'); // Local: "ws://localhost:5000"
 
 socket.addEventListener('open', function (event) {
     console.log('Connected to the WS Server!')
