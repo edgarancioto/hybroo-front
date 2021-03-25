@@ -10,7 +10,6 @@ socket.addEventListener('close', function (event) {
 });
 
 socket.addEventListener('message', function (event) {
-    console.log(event)
     const { task } = JSON.parse(event.data)
 
     switch (task) {
@@ -33,9 +32,12 @@ socket.addEventListener('message', function (event) {
 
         case "functions_methods":
             const xsd = JSON.parse(event.data)
+            console.log(xsd)
             // Popula single methos
             jsonToArray(xsd).map(function (item) {
-                $('#method_single').append('<option  value="' + item[0] + '">' + item[1].name + '</option>');
+                if (item[0] !== "task") {
+                    $('#method_single').append('<option  value="' + item[0] + '">' + item[1].name + '</option>');
+                }
             });
 
             // Popula hybrid methods
@@ -149,6 +151,8 @@ function getDetails() {
 }
 
 function sendData() {
+    firstMethod = []
+    secondMethod = []
     $("div#group-first-method :input").each(function () {
         let input = $(this);
         let label = input[0].name
