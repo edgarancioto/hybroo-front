@@ -10,6 +10,7 @@ socket.addEventListener('close', function (event) {
 });
 
 socket.addEventListener('message', function (event) {
+    console.log(event)
     const { task } = JSON.parse(event.data)
 
     switch (task) {
@@ -47,9 +48,9 @@ socket.addEventListener('message', function (event) {
             functionMethod = jsonToArray(xsd)
             break;
 
-        case "functions_solver":
-            console.log(JSON.parse(event.data))
-            break;
+        // case "functions_solver":
+        //     console.log(event.data)
+        //     break;
 
         default:
             break;
