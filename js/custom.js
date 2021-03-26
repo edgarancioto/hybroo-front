@@ -31,29 +31,34 @@ socket.addEventListener('message', function (event) {
             break;
 
         case "functions_methods":
-            const xsd = JSON.parse(event.data)
-            console.log(xsd)
+            const RG4 = JSON.parse(event.data)
             // Popula single methos
-            jsonToArray(xsd).map(function (item) {
+            jsonToArray(RG4).map(function (item) {
                 if (item[0] !== "task") {
                     $('#method_single').append('<option  value="' + item[0] + '">' + item[1].name + '</option>');
                 }
             });
 
             // Popula hybrid methods
-            jsonToArray(xsd).map(function (item) {
+            jsonToArray(RG4).map(function (item) {
                 if (item[1].approach === "HYBRID") {
                     $('#method_hybrid').append('<option  value="' + item[0] + '">' + item[1].name + '</option>');
                 }
             });
 
-            functionMethod = jsonToArray(xsd)
+            functionMethod = jsonToArray(RG4)
             break;
 
         case "functions_solver":
-            const rfs = JSON.parse(event.data)
-            console.log(rfs.data)
-            alert(rfs.data)
+            const TE2 = JSON.parse(event.data)
+            console.log(TE2.data)
+            alert(TE2.data)
+            break;
+
+        case "functions_solver_results":
+            const PL8 = JSON.parse(event.data)
+            console.log(PL8)
+            alert(PL8)
             break;
 
         default:
@@ -64,6 +69,7 @@ socket.addEventListener('message', function (event) {
 
 // Popula card do container two
 function populateCardContainerTwo(value) {
+    switchTwo()
     labels = Object.keys(value)
     for (var i in labels) {
         $("#list").append(`
@@ -73,7 +79,7 @@ function populateCardContainerTwo(value) {
             </tr>
         `);
     }
-    switchTwo()
+
 }
 
 let optionsFunciton;
