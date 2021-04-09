@@ -3,12 +3,10 @@ import React from 'react';
 export default function Home() {
   const socket = new WebSocket('ws://hybroo2.herokuapp.com/0.0.0.0');
   // const socket = new WebSocket('ws://localhost:5000');
-  // eslint-disable-next-line no-unused-vars
   socket.addEventListener('open', (event) => {
     console.log('Connected to the WS Server!');
   });
 
-  // eslint-disable-next-line no-unused-vars
   socket.addEventListener('close', (event) => {
     console.log('Disconnected from the WS Server!');
   });
