@@ -28,7 +28,7 @@ export default function Home() {
               <div className="d-flex justify-content-between">
                 <div className="align-self-center header-col-left">
                   <div id="logo">
-                    <a href="home.html">
+                    <a href="/">
                       <img alt="" src="images/logo-1.png" />
                     </a>
                   </div>
@@ -36,7 +36,7 @@ export default function Home() {
                 <div className="align-self-center ml-auto header-col-mid">
                   <ul id="mainmenu">
                     <li>
-                      <a href="home">Home</a>
+                      <a href="/">Home</a>
                     </li>
                     <li>
                       <a href="functions-problems.html">Functions Problems</a>
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="row">
             <div className="col-lg-6">
               <div className="widget">
-                <a href="home">
+                <a href="/">
                   <img alt="" className="logo" src="images/logo-1.png" />
                 </a>
                 <div className="spacer-20" />
