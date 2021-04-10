@@ -1,23 +1,6 @@
 import React from 'react';
 
 export default function Home() {
-  const socket = new WebSocket('ws://hybroo2.herokuapp.com/0.0.0.0');
-  // const socket = new WebSocket('ws://localhost:5000');
-  socket.addEventListener('open', (event) => {
-    console.log('Connected to the WS Server!');
-  });
-
-  socket.addEventListener('close', (event) => {
-    console.log('Disconnected from the WS Server!');
-  });
-
-  socket.addEventListener('message', (event) => {
-    console.log(event.data);
-  });
-
-  const sendMsg = () => {
-    socket.send('functions_names');
-  };
 
   return (
     <div id="wrapper">
@@ -74,7 +57,7 @@ export default function Home() {
                   conhecimento e tecnologia de IA.
                 </p>
                 <div className="spacer-20" />
-                <a href="/" className="btn-custom" onClick={() => sendMsg()}>
+                <a href="/" className="btn-custom">
                   Ler Mais
                 </a>
                 <div className="mb-sm-30" />
