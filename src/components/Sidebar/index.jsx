@@ -9,7 +9,8 @@ import VideoLibraryRoundedIcon from '@material-ui/icons/VideoLibraryRounded';
 import logoHybroo from "../../assets/img/logo-hybroo.png";
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar(props) {
+  const { page } = props
   return (
     <Container>
       <Header>
@@ -17,22 +18,22 @@ function Sidebar() {
       </Header>
       <Wrapper>
         <ul>
-          <Link to="/">
-            <li className="active">
+          <Link to="/getting-started">
+            <li className={ page === "getting-started" ? "active" : ""}>
               <VideoLibraryRoundedIcon />
               Getting Started
             </li>
           </Link>
 
-          <Link to="/">
-            <li>
+          <Link to="/hybroo">
+            <li className={ page === "hybroo" ? "active" : ""}>
               <BookmarksIcon />
               Hybroo
             </li>
           </Link>
 
-          <Link to="/">
-            <li>
+          <Link to="/library">
+            <li className={ page === "library" ? "active" : ""}>
               <LibraryBooksRoundedIcon/>
               Library
             </li>
