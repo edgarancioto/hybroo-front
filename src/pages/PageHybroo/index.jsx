@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
-import { Container } from "./styles";
+import { Container, TitleApp, Card, ContainerCard, CardFunction } from "./styles";
+import FunctionsOutlinedIcon from "@material-ui/icons/FunctionsOutlined";
 
 export default function PageHybroo() {
   const [ws, setWs] = useState(undefined);
-  //const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  //const socket = new WebSocket("wss://hybroo2.herokuapp.com/0.0.0.0"); // Local: "ws://localhost:5000"
+  const [functionNames, setFunctionNames] = useState("");
 
   function enterSocket() {
     let ws = new WebSocket("wss://hybroo2.herokuapp.com/0.0.0.0");
@@ -35,24 +35,43 @@ export default function PageHybroo() {
   }
 
   function sendMessage() {
-    var msg = JSON.stringify({ task: "functions_details", params:  { 'function_id': 4 } });
+    var msg = JSON.stringify({ task: "functions_names", params: "None" });
     ws.send(msg);
-
   }
+
+  const handleChange = (event) => {
+    setFunctionNames(event.target.value);
+  };
+
+  useEffect(() => {
+    enterSocket();
+    if (ws !== undefined) {
+      sendMessage();
+    }
+  }, []);
 
   return (
     <div>
       <Sidebar page="hybroo" />
       <NavBar />
       <Container>
-        <h1>Hybroo</h1>
+        <TitleApp>Applications</TitleApp>
 
-        <button
-          type="button"
-          onClick={() => (ws ? sendMessage() : enterSocket())}
-        >
-          {ws ? "Send" : "Enter"}
-        </button>
+        <ContainerCard>
+          <Card className="select">
+            <FunctionsOutlinedIcon />
+            <div>Functions Problems</div>
+          </Card>
+
+          <Card>
+            <FunctionsOutlinedIcon />
+            <div>Intances Problems</div>
+          </Card>
+
+          <CardFunction>
+
+          </CardFunction>
+        </ContainerCard>
       </Container>
     </div>
   );
