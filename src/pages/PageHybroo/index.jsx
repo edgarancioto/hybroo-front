@@ -2,13 +2,25 @@ import React, { useState, useEffect } from "react";
 
 import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
-import { Container, TitleApp, Card, ContainerCard, CardFunction } from "./styles";
+import {
+  Container,
+  TitleApp,
+  Card,
+  ContainerCard,
+  FunctionSelected,
+} from "./styles";
 import FunctionsOutlinedIcon from "@material-ui/icons/FunctionsOutlined";
+import FunctionsProblems from "./FunctionsProblems";
+import InstanceProblems from "./InstancesProblems";
 
 export default function PageHybroo() {
   const [ws, setWs] = useState(undefined);
   const [messages, setMessages] = useState([]);
-  const [functionNames, setFunctionNames] = useState("");
+  const [selectApplications, setSelectApplications] = useState(3);
+
+  const handleSelected = (event) => {
+    setSelectApplications(event);
+  };
 
   function enterSocket() {
     let ws = new WebSocket("wss://hybroo2.herokuapp.com/0.0.0.0");
@@ -24,9 +36,7 @@ export default function PageHybroo() {
     };
 
     ws.onmessage = (msg) => {
-      console.log("Websocket message:", { msg });
       setMessages(JSON.parse(msg.data));
-      console.log(JSON.parse(msg.data));
     };
 
     ws.onerror = (error) => {
@@ -34,21 +44,32 @@ export default function PageHybroo() {
     };
   }
 
-  function sendMessage() {
-    var msg = JSON.stringify({ task: "functions_names", params: "None" });
-    ws.send(msg);
+  function sendMessage(msg) {
+    if (ws) {
+      ws.send(msg);
+    } else {
+      enterSocket();
+    }
   }
 
-  const handleChange = (event) => {
-    setFunctionNames(event.target.value);
-  };
+  function getNamesFunction() {
+    const functionName = JSON.stringify({
+      task: "functions_names",
+      params: "None",
+    });
+    sendMessage(functionName);
+  }
 
   useEffect(() => {
     enterSocket();
-    if (ws !== undefined) {
-      sendMessage();
-    }
   }, []);
+
+  useEffect(() => {
+    if (!ws) return;
+    ws.onmessage = (msg) => {
+      setMessages(JSON.parse(msg.data));
+    };
+  }, [ws]);
 
   return (
     <div>
@@ -58,20 +79,31 @@ export default function PageHybroo() {
         <TitleApp>Applications</TitleApp>
 
         <ContainerCard>
-          <Card className="select">
+          <Card
+            onClick={() => {
+              handleSelected(0);
+              getNamesFunction();
+            }}
+            className={selectApplications === 0 ? "select" : "card"}
+          >
             <FunctionsOutlinedIcon />
             <div>Functions Problems</div>
           </Card>
 
-          <Card>
+          <Card
+            onClick={() => handleSelected(1)}
+            className={selectApplications === 1 ? "select" : "card"}
+          >
             <FunctionsOutlinedIcon />
-            <div>Intances Problems</div>
+            <div>Instances Problems</div>
           </Card>
-
-          <CardFunction>
-
-          </CardFunction>
         </ContainerCard>
+        <FunctionSelected>
+          {selectApplications === 0 && (
+            <FunctionsProblems sendMessage={sendMessage} response={messages} />
+          )}
+          {selectApplications === 1 && <InstanceProblems />}
+        </FunctionSelected>
       </Container>
     </div>
   );
