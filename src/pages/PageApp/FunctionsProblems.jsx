@@ -69,7 +69,9 @@ function FunctionsProblems(props) {
 
       <ul>
         {selectInfo.map((info) => {
+          // eslint-disable-next-line array-callback-return
           if (info[0] === "id") return;
+          // eslint-disable-next-line array-callback-return
           if (info[0] === "task") return;
           return (
             <li>

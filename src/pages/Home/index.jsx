@@ -22,10 +22,13 @@ export default function Home() {
                       <a href="/">Home</a>
                     </li>
                     <li>
-                      <a href="functions-problems.html">Functions Problems</a>
+                      <a href="applications">Applications</a>
                     </li>
                     <li>
-                      <a href="instance-problems">Instance Problems</a>
+                      <a href="workspaces">Workspaces</a>
+                    </li>
+                    <li>
+                      <a href="hybroo">About Hybroo</a>
                     </li>
                   </ul>
                 </div>

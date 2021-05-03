@@ -1,17 +1,15 @@
 import React from "react";
-
 import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 import { Container } from "./styles";
 
-export default function PageLibrary() {
-  
+export default function GettingStarted() {
   return (
     <div>
-      <Sidebar page="library" />
+      <Sidebar page="recent" />
       <NavBar />
       <Container>
-        <h1>Library</h1>
+        <h1>Recents - applicações recentes</h1>
       </Container>
     </div>
   );

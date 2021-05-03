@@ -13,7 +13,7 @@ import FunctionsOutlinedIcon from "@material-ui/icons/FunctionsOutlined";
 import FunctionsProblems from "./FunctionsProblems";
 import InstanceProblems from "./InstancesProblems";
 
-export default function PageHybroo() {
+export default function PageApp() {
   const [ws, setWs] = useState(undefined);
   const [messages, setMessages] = useState([]);
   const [selectApplications, setSelectApplications] = useState(3);
@@ -73,7 +73,7 @@ export default function PageHybroo() {
 
   return (
     <div>
-      <Sidebar page="hybroo" />
+      <Sidebar page="app" />
       <NavBar />
       <Container>
         <TitleApp>Applications</TitleApp>

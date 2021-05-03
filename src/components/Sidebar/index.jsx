@@ -18,38 +18,38 @@ function Sidebar(props) {
       </Header>
       <Wrapper>
         <ul>
-          <Link to="/getting-started">
-            <li className={ page === "getting-started" ? "active" : ""}>
+          <Link to="/dashboard-home">
+            <li className={ page === "dashboard-home" ? "active" : ""}>
               <VideoLibraryRoundedIcon />
-              Getting Started
+              Home
+            </li>
+          </Link>
+
+          <Link to="/workspaces">
+            <li className={ page === "workspaces" ? "active" : ""}>
+              <BookmarksIcon />
+              Workspaces
+            </li>
+          </Link>
+
+          <Link to="/applications">
+            <li className={ page === "applications" ? "active" : ""}>
+              <LibraryBooksRoundedIcon/>
+              Applications
+            </li>
+          </Link>
+
+          <Link to="/recent">
+            <li li className={ page === "recent" ? "active" : "" }>
+              <SettingsIcon />
+              Recent
             </li>
           </Link>
 
           <Link to="/hybroo">
-            <li className={ page === "hybroo" ? "active" : ""}>
-              <BookmarksIcon />
-              Hybroo
-            </li>
-          </Link>
-
-          <Link to="/library">
-            <li className={ page === "library" ? "active" : ""}>
-              <LibraryBooksRoundedIcon/>
-              Library
-            </li>
-          </Link>
-
-          <Link to="/">
-            <li>
-              <SettingsIcon />
-              Settings
-            </li>
-          </Link>
-
-          <Link to="/">
-            <li>
+            <li li className={ page === "hybroo" ? "active" : "" }>
               <EqualizerRoundedIcon />
-              Statistical Analysis
+              About Hybroo
             </li>
           </Link>
         </ul>
