@@ -1,8 +1,13 @@
-import React from 'react';
-import Routes from './routes/Routes';
+import React from "react";
+import Routes from "./routes/Routes";
+import { WebsocketsProvider } from "./context/useWebsockets";
 
 function App() {
-  return <Routes />;
+  return (
+    <WebsocketsProvider>
+      <Routes />
+    </WebsocketsProvider>
+  );
 }
 
 export default App;

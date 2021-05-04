@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { WebsocketsContext } from "../../context/useWebsockets"
 
 import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
@@ -14,43 +15,12 @@ import FunctionsProblems from "./FunctionsProblems";
 import InstanceProblems from "./InstancesProblems";
 
 export default function PageApp() {
-  const [ws, setWs] = useState(undefined);
-  const [messages, setMessages] = useState([]);
   const [selectApplications, setSelectApplications] = useState(3);
+  const { sendMessage } = useContext(WebsocketsContext);
 
   const handleSelected = (event) => {
     setSelectApplications(event);
   };
-
-  function enterSocket() {
-    let ws = new WebSocket("wss://hybroo2.herokuapp.com/0.0.0.0");
-
-    ws.onopen = (evt) => {
-      console.log("Websocket opened!", { evt });
-      setWs(ws);
-    };
-
-    ws.onclose = (evt) => {
-      console.log("Websocket closed!", { evt });
-      setWs(undefined);
-    };
-
-    ws.onmessage = (msg) => {
-      setMessages(JSON.parse(msg.data));
-    };
-
-    ws.onerror = (error) => {
-      console.log("Websocket error:", { error });
-    };
-  }
-
-  function sendMessage(msg) {
-    if (ws) {
-      ws.send(msg);
-    } else {
-      enterSocket();
-    }
-  }
 
   function getNamesFunction() {
     const functionName = JSON.stringify({
@@ -59,17 +29,6 @@ export default function PageApp() {
     });
     sendMessage(functionName);
   }
-
-  useEffect(() => {
-    enterSocket();
-  }, []);
-
-  useEffect(() => {
-    if (!ws) return;
-    ws.onmessage = (msg) => {
-      setMessages(JSON.parse(msg.data));
-    };
-  }, [ws]);
 
   return (
     <div>
@@ -100,7 +59,7 @@ export default function PageApp() {
         </ContainerCard>
         <FunctionSelected>
           {selectApplications === 0 && (
-            <FunctionsProblems sendMessage={sendMessage} response={messages} />
+            <FunctionsProblems />
           )}
           {selectApplications === 1 && <InstanceProblems />}
         </FunctionSelected>

@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
-
+/* eslint-disable no-fallthrough */
+import React, { useContext, useEffect, useState } from "react";
 import Select from "react-select";
+import {
+  FunctionContainer,
+  FunctionTittle,
+  FunctionContent,
+  ButtonsCard,
+  ContentButtons,
+} from "./styles";
+import { WebsocketsContext } from "../../context/useWebsockets";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
-import { FunctionContainer, FunctionTittle, FunctionContent } from "./styles";
-
-function FunctionsProblems(props) {
-  const { sendMessage, response } = props;
+function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
   const [selectInfo, setSelectInfo] = useState([]);
   const [selectImage, setSelectImage] = useState([]);
+  const [selectOptions, setSelectOptions] = useState();
+
+  const { sendMessage, response } = useContext(WebsocketsContext);
+
+  const MyComponent = () => (
+    <Select options={selectData} onChange={handleChange} />
+  );
 
   function getDetails(id) {
     sendMessage(
@@ -27,6 +40,7 @@ function FunctionsProblems(props) {
 
   function handleChange(event) {
     getDetails(event.value);
+    setSelectOptions(event);
   }
 
   function jsonToArray(obj) {
@@ -52,16 +66,12 @@ function FunctionsProblems(props) {
 
       case "functions_details_img":
         setSelectImage(response);
-        console.log(response);
-      // eslint-disable-next-line no-fallthrough
+
       default:
         break;
     }
   }, [response]);
 
-  const MyComponent = () => (
-    <Select options={selectData} onChange={handleChange} />
-  );
   return (
     <FunctionContainer>
       <FunctionTittle>Select Function</FunctionTittle>
@@ -69,10 +79,8 @@ function FunctionsProblems(props) {
 
       <ul>
         {selectInfo.map((info) => {
-          // eslint-disable-next-line array-callback-return
-          if (info[0] === "id") return;
-          // eslint-disable-next-line array-callback-return
-          if (info[0] === "task") return;
+          if (info[0] === "id") return null;
+          if (info[0] === "task") return null;
           return (
             <li>
               <strong>{info[0]}</strong>
@@ -86,7 +94,16 @@ function FunctionsProblems(props) {
           src={selectImage.img}
           alt="
         formulation"
+          s
         />
+      ) : null}
+
+      {selectOptions !== undefined ? (
+        <ContentButtons>
+          <ButtonsCard>
+            <AddBoxIcon /> confirm
+          </ButtonsCard>
+        </ContentButtons>
       ) : null}
     </FunctionContainer>
   );

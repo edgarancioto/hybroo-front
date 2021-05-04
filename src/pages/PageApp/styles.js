@@ -103,3 +103,29 @@ export const FunctionContent = styled.div`
   width: 100%;
   padding: 10px;
 `;
+
+export const ButtonsCard = styled.button`
+  align-items: center;
+  text-align: center;
+  border: none;
+  color: #777;
+  background-color: transparent;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+
+  font-weight: bolder;
+  font-size: 16px;
+
+  :hover {
+    color: #f78e20;
+  }
+`;
+
+export const ContentButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 26px 0px -10px 40px;
+  width: 100%;
+`;
