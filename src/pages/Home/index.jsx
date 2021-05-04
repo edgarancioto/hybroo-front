@@ -1,4 +1,5 @@
 import React from 'react';
+import CardTeam from "../../components/CardTeam"
 
 export default function Home() {
 
@@ -75,6 +76,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <CardTeam />
       </div>
       <footer className="footer-light">
         <div className="container">
