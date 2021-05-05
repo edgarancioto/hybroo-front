@@ -1,8 +1,11 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import * as S from "./styles";
+import { data } from "../../productions";
 
 export default function HybrooDescription() {
+  const productions = data.productions;
+
   return (
     <S.Container className="container">
       <h2>About Hybroo</h2>
@@ -61,6 +64,18 @@ export default function HybrooDescription() {
           environment for testing algorithms and with the possibility of solving
           real problems.
         </p>
+      </Grid>
+      <Grid>
+        {
+          productions.map( (item) =>{
+            return(
+              <div>
+                <h5>{item.name}</h5>
+                <p>{item.title}</p>
+              </div>
+            )
+          })
+        }
       </Grid>
     </S.Container>
   );
