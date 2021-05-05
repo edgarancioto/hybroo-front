@@ -26,69 +26,19 @@ export default function CardTeam() {
               </div>
 
               <div>
-                <h5>Edicar canhoto</h5>
+                <h5>Edgar Marcos Ancioto Junior</h5>
                 <span>
-                  sou dicar e escrevo com a mao esquerda gosto de dar trabalho
-                  com meus alunos e passo trabalho de 65 dias pra 2 dias estar
-                  prontos
+                  Criação da Hybroo, de 5 dos algoritmos, coorientação dos
+                  alunos de iniciação científica para desenvolvimento dos planos
+                  de trabalho.
                 </span>
               </div>
             </div>
             <div className="LinkIcons">
-              <Link>
+              <Link to="https://www.linkedin.com/in/edgar-ancioto-837983191/">
                 <GitHubIcon />
               </Link>
-              <Link>
-                <LinkedInIcon />
-              </Link>
-            </div>
-          </S.TeamCard>
-
-          <S.TeamCard>
-            <div>
-              <div className="avatar">
-                <AccountCircleIcon />
-              </div>
-
-              <div>
-                <h5>Edicar canhoto</h5>
-                <span>
-                  sou dicar e escrevo com a mao esquerda gosto de dar trabalho
-                  com meus alunos e passo trabalho de 65 dias pra 2 dias estar
-                  prontos
-                </span>
-              </div>
-            </div>
-            <div className="LinkIcons">
-              <Link>
-                <GitHubIcon />
-              </Link>
-              <Link>
-                <LinkedInIcon />
-              </Link>
-            </div>
-          </S.TeamCard>
-
-          <S.TeamCard>
-            <div>
-              <div className="avatar">
-                <AccountCircleIcon />
-              </div>
-
-              <div>
-                <h5>Edicar canhoto</h5>
-                <span>
-                  sou dicar e escrevo com a mao esquerda gosto de dar trabalho
-                  com meus alunos e passo trabalho de 65 dias pra 2 dias estar
-                  prontos
-                </span>
-              </div>
-            </div>
-            <div className="LinkIcons">
-              <Link>
-                <GitHubIcon />
-              </Link>
-              <Link>
+              <Link to="https://github.com/edgarancioto">
                 <LinkedInIcon />
               </Link>
             </div>
