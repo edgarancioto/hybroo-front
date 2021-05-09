@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardTeam from "../../components/CardTeam";
+import HybrooArticles from "../../components/HybrooArticles";
 import HybrooDescription from "../../components/HybrooDescription";
 
+import { WebsocketsContext } from "../../context/useWebsockets";
+
 export default function Home() {
+  const { response } = useContext(WebsocketsContext);
+  const [homeInfo, setHomeInfo] = useState([]);
+
+
+  useEffect(() => {
+    const data = response;
+    const task = response.task;
+
+    switch (task) {
+      case "home_info":
+        setHomeInfo(data);
+      // eslint-disable-next-line no-fallthrough
+      default:
+        break;
+    }
+  }, [response]);
+
   return (
     <div id="wrapper">
       <header className="header-light-black transparent scroll-light">
@@ -47,37 +67,14 @@ export default function Home() {
           className="full-height vertical-center"
         >
           <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
-                <div className="spacer-10" />
-                <h1>
-                  <span className="id-color">
-                    <strong>HYBROO</strong>
-                  </span>
-                </h1>
-                <p className="lead">
-                  The Hybroo project was created by Edgar Marcos Ancioto Junior,
-                  in his master's dissertation in May 2018. The platform aims to
-                  bring together sets of problems of different types and enable
-                  them to be solved using Artificial Intelligence algorithms...
-                </p>
-                <div className="spacer-20" />
-
-                <div className="mb-sm-30" />
-              </div>
-
-              <div
-                className="col-lg-6 offset-lg-1 wow fadeInLeft"
-                data-wow-delay=".5s"
-              >
-                <img src="images/misc/1.png" className="img-fluid" alt="" />
-              </div>
-            </div>
+            
+          <HybrooDescription homeInfo={homeInfo} />
+            
           </div>
         </section>
 
-        <CardTeam />
-        <HybrooDescription />
+        <CardTeam homeInfo={homeInfo} />
+        <HybrooArticles homeInfo={homeInfo} />
       </div>
       <footer className="footer-light">
         <div className="container">

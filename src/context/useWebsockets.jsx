@@ -13,6 +13,11 @@ export const WebsocketsProvider = ({ children }) => {
   const [response, setResponse] = useState([]);
   const API_WEBSOCKET = "wss://hybroo2.herokuapp.com/0.0.0.0";
 
+  const initialSendMsg = JSON.stringify({
+    task: "home_info",
+    params: "None",
+  });
+
   function enterSocket() {
     let ws = new WebSocket(API_WEBSOCKET);
 
@@ -33,9 +38,10 @@ export const WebsocketsProvider = ({ children }) => {
     ws.onerror = (error) => {
       console.log("Websocket error:", { error });
     };
+
   }
 
-	function sendMessage(msg) {
+  function sendMessage(msg) {
     if (ws) {
       ws.send(msg);
     } else {
@@ -43,7 +49,7 @@ export const WebsocketsProvider = ({ children }) => {
     }
   }
 
-	useEffect(() => {
+  useEffect(() => {
     enterSocket();
   }, []);
 
@@ -52,10 +58,15 @@ export const WebsocketsProvider = ({ children }) => {
     ws.onmessage = (msg) => {
       setResponse(JSON.parse(msg.data));
     };
+    
+    if(response === []) return;
+    ws.send(initialSendMsg); 
   }, [ws]);
 
   return (
-    <WebsocketsContext.Provider value={{ ws, response, enterSocket, sendMessage }}>
+    <WebsocketsContext.Provider
+      value={{ ws, response, enterSocket, sendMessage }}
+    >
       {children}
     </WebsocketsContext.Provider>
   );

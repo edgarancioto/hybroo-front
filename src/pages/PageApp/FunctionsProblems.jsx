@@ -10,17 +10,23 @@ import {
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
   const [selectInfo, setSelectInfo] = useState([]);
   const [selectImage, setSelectImage] = useState([]);
   const [selectOptions, setSelectOptions] = useState();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const { sendMessage, response } = useContext(WebsocketsContext);
 
   const MyComponent = () => (
-    <Select options={selectData} onChange={handleChange} />
+    <Select
+      options={selectData}
+      isDisabled={isDisabled}
+      onChange={handleChange}
+    />
   );
 
   function getDetails(id) {
@@ -45,6 +51,10 @@ function FunctionsProblems() {
 
   function jsonToArray(obj) {
     return Object.keys(obj).map((key) => [key, obj[key]]);
+  }
+
+  function confirmOptions() {
+    setIsDisabled(!isDisabled);
   }
 
   useEffect(() => {
@@ -73,39 +83,55 @@ function FunctionsProblems() {
   }, [response]);
 
   return (
-    <FunctionContainer>
-      <FunctionTittle>Select Function</FunctionTittle>
-      <FunctionContent>{MyComponent()}</FunctionContent>
+    <>
+      <FunctionContainer>
+        <FunctionTittle>Select Function</FunctionTittle>
+        <FunctionContent>{MyComponent()}</FunctionContent>
 
-      <ul>
-        {selectInfo.map((info) => {
-          if (info[0] === "id") return null;
-          if (info[0] === "task") return null;
-          return (
-            <li>
-              <strong>{info[0]}</strong>
-              <span>{info[1]}</span>
-            </li>
-          );
-        })}
-      </ul>
-      {selectImage.img !== undefined ? (
-        <img
-          src={selectImage.img}
-          alt="
+        <ul>
+          {selectInfo.map((info) => {
+            if (info[0] === "id") return null;
+            if (info[0] === "task") return null;
+            return (
+              <li>
+                <strong>{info[0]}</strong>
+                <span>{info[1]}</span>
+              </li>
+            );
+          })}
+        </ul>
+        {selectImage.img !== undefined && selectOptions !== undefined ? (
+          <img
+            src={selectImage.img}
+            alt="
         formulation"
-          s
-        />
-      ) : null}
+            s
+          />
+        ) : null}
 
-      {selectOptions !== undefined ? (
-        <ContentButtons>
-          <ButtonsCard>
-            <AddBoxIcon /> confirm
-          </ButtonsCard>
-        </ContentButtons>
+        {selectOptions !== undefined ? (
+          <ContentButtons>
+            <ButtonsCard onClick={() => confirmOptions()}>
+              {isDisabled ? (
+                <>
+                  <EditRoundedIcon /> <spam>To Edit</spam>
+                </>
+              ) : (
+                <>
+                  <AddBoxIcon /> <spam>Confirm</spam>
+                </>
+              )}
+            </ButtonsCard>
+          </ContentButtons>
+        ) : null}
+      </FunctionContainer>
+
+      {isDisabled ? (
+        <FunctionContainer>
+          <FunctionTittle>Options</FunctionTittle>
+        </FunctionContainer>
       ) : null}
-    </FunctionContainer>
+    </>
   );
 }
 

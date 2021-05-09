@@ -120,6 +120,10 @@ export const ButtonsCard = styled.button`
   :hover {
     color: #f78e20;
   }
+  :focus {
+    border: none;
+    outline: none;
+  }
 `;
 
 export const ContentButtons = styled.div`
