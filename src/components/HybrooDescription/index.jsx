@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import * as S from "./styles";
+import parse from 'html-react-parser';
 
 export default function HybrooDescription(props) {
   const { homeInfo } = props
@@ -10,7 +11,7 @@ export default function HybrooDescription(props) {
       <h2>About Hybroo</h2>
 
       <Grid>
-        {homeInfo.descrição}
+        {parse("<p>" + homeInfo.descrição +"</p>")}
       </Grid>
     </S.Container>
   );

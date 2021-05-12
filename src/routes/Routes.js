@@ -6,7 +6,6 @@ import DashboardHome from "../pages/DashboardHome";
 import PageApp from "../pages/PageApp";
 import Workspaces from "../pages/Workspaces";
 import Recent from "../pages/Recent";
-import AboutHybroo from "../pages/AboutHybroo";
 
 
 export default function Routes() {
@@ -18,7 +17,6 @@ export default function Routes() {
         <Route path="/workspaces" component={Workspaces} />
         <Route path="/applications" component={PageApp} />
         <Route path="/recent" component={Recent} />
-        <Route path="/hybroo" component={AboutHybroo} />
       </Switch>
     </BrowserRouter>
   );

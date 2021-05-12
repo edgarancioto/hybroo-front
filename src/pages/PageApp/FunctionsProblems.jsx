@@ -7,17 +7,23 @@ import {
   FunctionContent,
   ButtonsCard,
   ContentButtons,
+  OptionsContent,
+  ButtonSwitch,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import Switch from "react-switch";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
   const [selectInfo, setSelectInfo] = useState([]);
   const [selectImage, setSelectImage] = useState([]);
   const [selectOptions, setSelectOptions] = useState();
+  const [optionsMethods, setOptionsMethods] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [checkHybrid, setCheckHybrid] = useState(false);
+  const [numDimension, setNumDimension] = useState(2);
 
   const { sendMessage, response } = useContext(WebsocketsContext);
 
@@ -44,9 +50,26 @@ function FunctionsProblems() {
     );
   }
 
+  function getMethods() {
+    sendMessage(
+      JSON.stringify({
+        task: "functions_methods",
+        params: "None",
+      })
+    );
+  }
+
   function handleChange(event) {
     getDetails(event.value);
     setSelectOptions(event);
+  }
+  function handleCheckHybrid() {
+    setCheckHybrid(!checkHybrid);
+  }
+
+  function handleInputNumber(event) {
+    const { value } = event.target;
+    setNumDimension(value);
   }
 
   function jsonToArray(obj) {
@@ -54,6 +77,7 @@ function FunctionsProblems() {
   }
 
   function confirmOptions() {
+    getMethods();
     setIsDisabled(!isDisabled);
   }
 
@@ -77,10 +101,16 @@ function FunctionsProblems() {
       case "functions_details_img":
         setSelectImage(response);
 
+      case "functions_methods":
+        let methods = jsonToArray(response);
+        setOptionsMethods(methods);
+
       default:
         break;
     }
   }, [response]);
+
+  console.log(optionsMethods);
 
   return (
     <>
@@ -129,6 +159,56 @@ function FunctionsProblems() {
       {isDisabled ? (
         <FunctionContainer>
           <FunctionTittle>Options</FunctionTittle>
+          <FunctionContent>
+            <OptionsContent>
+              <div>
+                <span>
+                  Inform the number of dimensions to execute the function
+                </span>
+                <input
+                  type="number"
+                  id="dimensions"
+                  name="dimensions"
+                  class="form-control"
+                  step={1}
+                  value={numDimension}
+                  onChange={(e) => handleInputNumber(e)}
+                />
+
+                <span>First Method</span>
+                <select
+                  class="form-control"
+                  name="first-method"
+                  id="method_single"
+                >
+                  <option disabled="" selected="" value="0">
+                    - select an option -
+                  </option>
+                  {optionsMethods.map((item) => {
+                    if (item[0] === "task") return null;
+                    return <option value={item[0]}>{item[1].name}</option>;
+                  })}
+                </select>
+              </div>
+
+              <div>
+                <ButtonSwitch>
+                  <spam>SINGLE</spam>
+                  <Switch
+                    onChange={() => handleCheckHybrid()}
+                    checked={checkHybrid}
+                    height={20}
+                    width={40}
+                    offColor="#eee"
+                    onColor="#eee"
+                    onHandleColor="#208ccc"
+                    offHandleColor="#208ccc"
+                  />
+                  <spam>HYBRID</spam>
+                </ButtonSwitch>
+              </div>
+            </OptionsContent>
+          </FunctionContent>
         </FunctionContainer>
       ) : null}
     </>

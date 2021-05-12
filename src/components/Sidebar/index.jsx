@@ -45,13 +45,6 @@ function Sidebar(props) {
               Recent
             </li>
           </Link>
-
-          <Link to="/hybroo">
-            <li li className={ page === "hybroo" ? "active" : "" }>
-              <EqualizerRoundedIcon />
-              About Hybroo
-            </li>
-          </Link>
         </ul>
       </Wrapper>
     </Container>

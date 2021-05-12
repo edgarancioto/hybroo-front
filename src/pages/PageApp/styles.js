@@ -133,3 +133,27 @@ export const ContentButtons = styled.div`
   margin: 26px 0px -10px 40px;
   width: 100%;
 `;
+
+export const OptionsContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 50%;
+
+  }
+
+  .react-switch-handle {
+    top: 10px !important;
+  }
+`;
+
+export const ButtonSwitch = styled.div`
+  display: flex;
+  flex-direction: row !important;
+`;
