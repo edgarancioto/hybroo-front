@@ -145,7 +145,6 @@ export const OptionsContent = styled.div`
     align-items: center;
     padding: 10px;
     width: 50%;
-
   }
 
   .react-switch-handle {
@@ -156,4 +155,28 @@ export const OptionsContent = styled.div`
 export const ButtonSwitch = styled.div`
   display: flex;
   flex-direction: row !important;
+`;
+
+export const FieldsFirstMethod = styled.div`
+  width: 100% !important;
+  padding: 0 !important;
+  margin-top: 14px;
+  text-align: inherit;
+
+  label {
+    width: 100%;
+    padding: 0 5px;
+  }
+`;
+
+export const FieldsSecondMethod = styled.div`
+  width: 100% !important;
+  padding: 0 !important;
+  margin-top: 14px;
+  text-align: inherit;
+
+  label {
+    width: 100%;
+    padding: 0 5px;
+  }
 `;
