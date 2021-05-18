@@ -180,3 +180,26 @@ export const FieldsSecondMethod = styled.div`
     padding: 0 5px;
   }
 `;
+
+export const WrapperButtons = styled.div`
+  width: 100%;
+  padding: 5px;
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: center;
+`;
+export const SubimitButton = styled.button`
+  border: none;
+  border-color: #f78e20;
+  background-color: #f78e20;
+  color: #fff;
+
+  padding:20px 40px;
+  cursor: pointer;
+
+  :hover {
+    background-color: #f47f09;
+  }
+
+`;

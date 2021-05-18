@@ -10,12 +10,15 @@ import {
   OptionsContent,
   ButtonSwitch,
   FieldsFirstMethod,
-  FieldsSecondMethod
+  FieldsSecondMethod,
+  SubimitButton,
+  WrapperButtons,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Switch from "react-switch";
+import useChangeInput from "../../helpers/useChangeInput";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
@@ -28,7 +31,7 @@ function FunctionsProblems() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [checkHybrid, setCheckHybrid] = useState(false);
   const [numDimension, setNumDimension] = useState(1);
-  const [numberDimension, setNumberDimension] = useState({ value : 1 });
+  const [numberDimension, setNumberDimension] = useState({ value: 1 });
 
   const { sendMessage, response } = useContext(WebsocketsContext);
 
@@ -77,7 +80,7 @@ function FunctionsProblems() {
     setNumDimension(value);
   }
 
-  function handleFirstMethod(event) {
+  function handleFirstMethodFields(event) {
     const { value } = event.target;
 
     let newFields = [];
@@ -90,7 +93,11 @@ function FunctionsProblems() {
     setSelectFirstMethod(newFields);
   }
 
-  function handleSecondMethod(event) {
+  function collectionFirstMethod() {
+    console.log("test")
+  }
+
+  function handleSecondMethodFields(event) {
     const { value } = event.target;
 
     let newFields = [];
@@ -132,18 +139,18 @@ function FunctionsProblems() {
 
       case "functions_details":
         let vetor = jsonToArray(response);
-        let n = response.description.substring(0, 1)
-        if(n !== "n") {
+        let n = response.description.substring(0, 1);
+        if (n !== "n") {
           setNumberDimension({
-              value: parseInt(n)
-          })
-          setNumDimension(parseInt(n))
+            value: parseInt(n),
+          });
+          setNumDimension(parseInt(n));
         }
-        if(n === "n") {
+        if (n === "n") {
           setNumberDimension({
-              value: 1
-          })
-          setNumDimension(1)
+            value: 1,
+          });
+          setNumDimension(1);
         }
 
         setSelectInfo(vetor);
@@ -160,9 +167,8 @@ function FunctionsProblems() {
         break;
     }
   }, [response]);
-  
-  console.log(numberDimension)
 
+  console.log(optionsMethods);
   return (
     <>
       <FunctionContainer>
@@ -182,12 +188,7 @@ function FunctionsProblems() {
           })}
         </ul>
         {selectImage.img !== undefined && selectOptions !== undefined ? (
-          <img
-            src={selectImage.img}
-            alt="
-        formulation"
-            s
-          />
+          <img src={selectImage.img} alt="formulation" />
         ) : null}
 
         {selectOptions !== undefined ? (
@@ -232,7 +233,7 @@ function FunctionsProblems() {
                   class="form-control"
                   name="first-method"
                   id="method_single"
-                  onChange={(e) => handleFirstMethod(e)}
+                  onChange={(e) => handleFirstMethodFields(e)}
                 >
                   <option disabled="" selected="" value="0">
                     - select an option -
@@ -244,7 +245,7 @@ function FunctionsProblems() {
                 </select>
 
                 <FieldsFirstMethod>
-                  {selectFirstMethod.map((item) => {
+                  {selectFirstMethod.map((item, index) => {
                     return (
                       <>
                         <label>{item.label}</label>
@@ -255,6 +256,7 @@ function FunctionsProblems() {
                           defaultValue={item.default}
                           min={item.min}
                           class="form-control"
+                          id={"firstMethod" + index}
                         />
                       </>
                     );
@@ -280,12 +282,12 @@ function FunctionsProblems() {
 
                 {checkHybrid ? (
                   <>
-                    <span style={{ marginTop: "32px"}}>Second Method</span>
+                    <span style={{ marginTop: "32px" }}>Second Method</span>
                     <select
                       class="form-control"
                       name="second-method"
                       id="method_second"
-                      onChange={(e) => handleSecondMethod(e)}
+                      onChange={(e) => handleSecondMethodFields(e)}
                     >
                       <option disabled="" selected="" value="0">
                         - select an option -
@@ -297,8 +299,8 @@ function FunctionsProblems() {
                       })}
                     </select>
 
-                    <FieldsSecondMethod>
-                      {selectSecondMethod.map((item) => {
+                    <FieldsSecondMethod id="group-first-method">
+                      {selectSecondMethod.map((item, index) => {
                         return (
                           <>
                             <label>{item.label}</label>
@@ -319,6 +321,9 @@ function FunctionsProblems() {
               </div>
             </OptionsContent>
           </FunctionContent>
+          <WrapperButtons>
+            <SubimitButton onClick={() => collectionFirstMethod() }>Submit Function</SubimitButton>
+          </WrapperButtons>
         </FunctionContainer>
       ) : null}
     </>
