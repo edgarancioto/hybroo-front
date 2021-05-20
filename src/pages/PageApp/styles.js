@@ -198,8 +198,14 @@ export const SubimitButton = styled.button`
   padding:20px 40px;
   cursor: pointer;
 
+  transition: ease-in-out 0.3s;
+  
   :hover {
     background-color: #f47f09;
+  }
+  :focus {
+    border: none;
+    outline: none;
   }
 
 `;

@@ -15,10 +15,10 @@ import {
   WrapperButtons,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
+import { ResultMethodContext } from "../../context/useResultMethod"
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Switch from "react-switch";
-import useChangeInput from "../../helpers/useChangeInput";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
@@ -32,8 +32,11 @@ function FunctionsProblems() {
   const [checkHybrid, setCheckHybrid] = useState(false);
   const [numDimension, setNumDimension] = useState(1);
   const [numberDimension, setNumberDimension] = useState({ value: 1 });
+  //const [collectionData, setCollectionData] = useState({});
+  //const [resultRequest, setResultRequest] = useState({});
 
   const { sendMessage, response } = useContext(WebsocketsContext);
+  const { resultMethod } = useContext(ResultMethodContext);
 
   const MyComponent = () => (
     <Select
@@ -93,8 +96,55 @@ function FunctionsProblems() {
     setSelectFirstMethod(newFields);
   }
 
-  function collectionFirstMethod() {
-    console.log("test")
+  function submitCollectionData() {
+    var optionSingle =
+      document.getElementById("option_single") !== null
+        ? document.getElementById("option_single").value
+        : "0";
+    var optionSecond =
+      document.getElementById("option_second") !== null
+        ? document.getElementById("option_second").value
+        : "0";
+
+    var fieldsFirtsMethod = [{ label: "first-method", value: optionSingle }];
+    var fieldsSecondMethod = [{ label: "second-method", value: optionSecond }];
+
+    if (selectFirstMethod.length > 0) {
+      selectFirstMethod.forEach((item, index) => {
+        var inputValue = document.getElementById("firstMethod" + index);
+        let label = item.label.split(" ")[0];
+        let value = inputValue.value;
+        let element = { label, value };
+        fieldsFirtsMethod.push(element);
+      });
+    }
+
+    if (checkHybrid) {
+      if (selectSecondMethod.length > 0) {
+        selectSecondMethod.forEach((item, index) => {
+          var inputValue = document.getElementById("secondMethod" + index);
+          let label = item.label.split(" ")[0];
+          let value = inputValue.value;
+          let element = { label, value };
+          fieldsSecondMethod.push(element);
+        });
+      }
+    }
+
+    let collectionData = {
+      problem: selectInfo[0][1].toString(),
+      dimension: numDimension.toString(),
+      isHybrid: checkHybrid,
+      firstMethod: fieldsFirtsMethod,
+      secondMethod: fieldsSecondMethod,
+    };
+
+    sendMessage(
+      JSON.stringify({
+        task: "functions_solver",
+        params: { collectionData },
+      })
+    );
   }
 
   function handleSecondMethodFields(event) {
@@ -158,17 +208,27 @@ function FunctionsProblems() {
 
       case "functions_details_img":
         setSelectImage(response);
+        break;
 
       case "functions_methods":
         let methods = jsonToArray(response);
         setOptionsMethods(methods);
+        break;
+
+      case "functions_solver":
+        console.log("mandou");
+        break;
 
       default:
         break;
     }
   }, [response]);
 
-  console.log(optionsMethods);
+  useEffect(() => {
+    console.log(resultMethod)
+    
+  }, [resultMethod]);
+
   return (
     <>
       <FunctionContainer>
@@ -232,7 +292,7 @@ function FunctionsProblems() {
                 <select
                   class="form-control"
                   name="first-method"
-                  id="method_single"
+                  id="option_single"
                   onChange={(e) => handleFirstMethodFields(e)}
                 >
                   <option disabled="" selected="" value="0">
@@ -286,7 +346,7 @@ function FunctionsProblems() {
                     <select
                       class="form-control"
                       name="second-method"
-                      id="method_second"
+                      id="option_second"
                       onChange={(e) => handleSecondMethodFields(e)}
                     >
                       <option disabled="" selected="" value="0">
@@ -311,6 +371,7 @@ function FunctionsProblems() {
                               defaultValue={item.default}
                               min={item.min}
                               class="form-control"
+                              id={"secondMethod" + index}
                             />
                           </>
                         );
@@ -322,7 +383,9 @@ function FunctionsProblems() {
             </OptionsContent>
           </FunctionContent>
           <WrapperButtons>
-            <SubimitButton onClick={() => collectionFirstMethod() }>Submit Function</SubimitButton>
+            <SubimitButton onClick={() => submitCollectionData()}>
+              Submit Function
+            </SubimitButton>
           </WrapperButtons>
         </FunctionContainer>
       ) : null}
