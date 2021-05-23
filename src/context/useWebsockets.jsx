@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from "react";
 
 const initialValue = {

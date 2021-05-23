@@ -215,19 +215,11 @@ function FunctionsProblems() {
         setOptionsMethods(methods);
         break;
 
-      case "functions_solver":
-        console.log("mandou");
-        break;
-
       default:
         break;
     }
   }, [response]);
 
-  useEffect(() => {
-    console.log(resultMethod)
-    
-  }, [resultMethod]);
 
   return (
     <>
