@@ -60,6 +60,10 @@ export const RecentTittle = styled.div`
 export const RecentContent = styled.div`
   width: 100%;
   padding: 10px;
+
+  h3 {
+    margin: 35px 0 10px 0;
+  }
 `;
 
 export const ListMethod = styled.div`
@@ -96,4 +100,23 @@ export const DataMethod = styled.div`
 		margin-right: 20px;
 	}
 `;
+
+export const RecentInfo = styled.div`
+
+`;
+export const RecentImgs = styled.div`
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  div img {
+    width: 100%;
+  }
+`;
+
 
