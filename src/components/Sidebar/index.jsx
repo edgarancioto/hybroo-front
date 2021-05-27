@@ -24,13 +24,6 @@ function Sidebar(props) {
             </li>
           </Link>
 
-          <Link to="/workspaces">
-            <li className={ page === "workspaces" ? "active" : ""}>
-              <BookmarksIcon />
-              Workspaces
-            </li>
-          </Link>
-
           <Link to="/applications">
             <li className={ page === "app" ? "active" : ""}>
               <LibraryBooksRoundedIcon/>

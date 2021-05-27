@@ -5,15 +5,23 @@ import { ResultMethodContext } from "../../context/useResultMethod";
 
 export default function ListMethods() {
   const { listMethod } = useContext(ResultMethodContext);
-  const [isShow, setIsShow] = useState(false);
-
+  console.log(listMethod);
+  const [isShow, setIsShow] = useState(99);
   function jsonToArray(obj) {
     return Object.keys(obj).map((key) => [key, obj[key]]);
   }
 
+  function handleChange(index) {
+    if (index !== isShow) {
+      setIsShow(index);
+    } else if (index === isShow) {
+      setIsShow(99);
+    }
+  }
+
   return (
     <>
-      {listMethod.map((item) => {
+      {listMethod.map((item, index) => {
         let best1 = item.method["result-first"]["decimal-best"][1];
         let best2 = item.method["result-first"]["decimal-best"][2];
         let valueBest1 = item.method["result-first"]["value-best"];
@@ -35,7 +43,7 @@ export default function ListMethods() {
 
         return (
           <S.RecentContainer>
-            <S.RecentTittle onClick={() => setIsShow(!isShow)}>
+            <S.RecentTittle onClick={() => handleChange(index)}>
               <S.ListMethod>
                 <S.TitleMethod>
                   <input type="checkbox" id="task1" />
@@ -49,7 +57,7 @@ export default function ListMethods() {
               </S.ListMethod>
             </S.RecentTittle>
 
-            {isShow ? (
+            {isShow === index ? (
               <S.RecentContent>
                 <S.RecentImgs>
                   {imgsArray.map((item) => {
@@ -58,7 +66,16 @@ export default function ListMethods() {
 
                     return (
                       <div>
-                        <img src={item[1]} alt={item[0]} />
+                        <img
+                          src={
+                            "data:image/jpeg;base64," +
+                            item[1]
+                              .replace("b", "")
+                              .replace("'", "")
+                              .replace("'", "")
+                          }
+                          alt={item[0]}
+                        />
                         <strong>{item[0]}</strong>
                       </div>
                     );

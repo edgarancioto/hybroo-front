@@ -61,32 +61,6 @@ export default function NavBar() {
           <MenuItem onClick={handleClose}>example of a notification</MenuItem>
         </Menu>
 
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          <User>
-            <Avatar>
-              <img src={avatarIcon} alt="avatar" />
-            </Avatar>
-            <Info>
-              <span>Usuario</span>
-            </Info>
-          </User>
-        </Button>
-
-        <Menu
-          id="simple-menu"
-          anchorEl={user}
-          keepMounted
-          open={Boolean(user)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
       </MenuUser>
     </Container>
   );
