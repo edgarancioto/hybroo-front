@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Container, Header, Wrapper } from "./styles";
-import BookmarksIcon from "@material-ui/icons/Bookmarks";
 import SettingsIcon from '@material-ui/icons/Settings';
 import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 import VideoLibraryRoundedIcon from '@material-ui/icons/VideoLibraryRounded';
