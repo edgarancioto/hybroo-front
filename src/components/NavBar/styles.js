@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 
 export const Container = styled.div`
   display: flex;
@@ -10,6 +11,7 @@ export const Container = styled.div`
   height: 80px;
 
   background-color: #fff;
+
 `;
 
 export const Logo = styled.div`
@@ -52,8 +54,23 @@ export const Avatar = styled.div`
     height: 40px;
   }
 `;
+export const TagNotification = styled.span`
+  ::before {
+    content: '';
+    background-color: #f78e20;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 35px;
+    margin: 22px 0px 0px 22px;
+  }
+`;
+export const NotificationIconResult = styled(NotificationsActiveOutlinedIcon)`
+  color: #6c757d;
+  margin: 10px;
+`;
 
-export const NotificationIcon = styled(NotificationsActiveOutlinedIcon)`
+export const NotificationIcon = styled(NotificationsNoneOutlinedIcon)`
   color: #6c757d;
   margin: 10px;
 `;
