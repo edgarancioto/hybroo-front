@@ -5,11 +5,7 @@ import { ResultMethodContext } from "../../context/useResultMethod";
 
 export default function ListMethods() {
   const { listMethod } = useContext(ResultMethodContext);
-  console.log(listMethod);
   const [isShow, setIsShow] = useState(99);
-  function jsonToArray(obj) {
-    return Object.keys(obj).map((key) => [key, obj[key]]);
-  }
 
   function handleChange(index) {
     if (index !== isShow) {
@@ -22,24 +18,6 @@ export default function ListMethods() {
   return (
     <>
       {listMethod.map((item, index) => {
-        let best1 = item.method["result-first"]["decimal-best"][1];
-        let best2 = item.method["result-first"]["decimal-best"][2];
-        let valueBest1 = item.method["result-first"]["value-best"];
-        let time1 = item.method["result-first"].time;
-
-        let best1S = "";
-        let best2S = "";
-        let valueBest2 = "";
-        let time2 = "";
-
-        if (item.method["result-second"] !== undefined) {
-          best1S = item.method["result-second"]["decimal-best"][1];
-          best2S = item.method["result-second"]["decimal-best"][2];
-          valueBest2 = item.method["result-second"]["value-best"];
-          time2 = item.method["result-second"].time;
-        }
-
-        let imgsArray = jsonToArray(item.method);
 
         return (
           <S.RecentContainer>
@@ -60,54 +38,58 @@ export default function ListMethods() {
             {isShow === index ? (
               <S.RecentContent>
                 <S.RecentImgs>
-                  {imgsArray.map((item) => {
-                    if (item[0] === "result-first") return null;
-                    if (item[0] === "result-second") return null;
+                  {item.imgArray.map((item) => {
+                    if (item === "") return null;
 
                     return (
                       <div>
                         <img
                           src={
                             "data:image/jpeg;base64," +
-                            item[1]
+                            item
                               .replace("b", "")
                               .replace("'", "")
                               .replace("'", "")
                           }
-                          alt={item[0]}
+                          alt="Img Result Method"
                         />
-                        <strong>{item[0]}</strong>
+                        {/* <strong>{item[0]}</strong> */}
                       </div>
                     );
                   })}
                 </S.RecentImgs>
+                <h3>Description Problem</h3>
+                <S.RecentInfo>
+                  <span>{item.description}</span>
+                </S.RecentInfo>
                 <h3>Result First Method</h3>
                 <S.RecentInfo>
-                  <strong>Decimal Best: </strong>[<span>{best1}</span>] , [
-                  <span>{best2}</span>]
+                  <strong>Decimal Best: </strong>[<span>{item.decimalBestFirst1}</span>] , [
+                  <span>{item.decimalBestFirst2}</span>]
                 </S.RecentInfo>
                 <S.RecentInfo>
                   <strong>Time: </strong>
-                  <span>{time1}</span>
+                  <span>{item.timeFirst}</span>
                 </S.RecentInfo>
                 <S.RecentInfo>
                   <strong>Value Best: </strong>
-                  <span>{valueBest1}</span>
+                  <span>{item.valueBestFirst}</span>
                 </S.RecentInfo>
-                {item.method["result-second"] !== undefined ? (
+                
+                {item.isHybrid ? (
                   <>
                     <h3>Result Second Method</h3>
                     <S.RecentInfo>
-                      <strong>Decimal Best: </strong>[<span>{best1S}</span>] , [
-                      <span>{best2S}</span>]
+                      <strong>Decimal Best: </strong>[<span>{item.decimalBestSecond1}</span>] , [
+                      <span>{item.decimalBestSecond1}</span>]
                     </S.RecentInfo>
                     <S.RecentInfo>
                       <strong>Time: </strong>
-                      <span>{time2}</span>
+                      <span>{item.timeSecond}</span>
                     </S.RecentInfo>
                     <S.RecentInfo>
                       <strong>Value Best: </strong>
-                      <span>{valueBest2}</span>
+                      <span>{item.valueBestSecond}</span>
                     </S.RecentInfo>
                   </>
                 ) : null}

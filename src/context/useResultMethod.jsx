@@ -50,13 +50,67 @@ export const ResultMethodProvider = ({ children }) => {
   }
 
   function newListMethod(res) {
+    let img3d = res["3d"];
+    let imgcontour = res.contour;
+    let err1 = res.err1;
+    let err2 = "";
+    let err3 = "";
+    let problem = res.problem;
+    let descriptionProblem = res["problem-description"];
+    let isHybrid = res.isHybrid;
+
+    //result first
+    let decimalBestFirst1 = res["result-first"]["decimal-best"][1];
+    let decimalBestFirst2 = res["result-first"]["decimal-best"][2];
+    let timeFirst = res["result-first"].time;
+    let valueBestFirst = res["result-first"]["value-best"];
+
+    //result second
+    let decimalBestSecond1 = "";
+    let decimalBestSecond2 = "";
+    let timeSecond = "";
+    let valueBestSecond = "";
+
+    if (isHybrid) {
+      err2 = res.err2;
+      err3 = res.err3;
+
+      decimalBestSecond1 = res["result-second"]["decimal-best"][1];
+      decimalBestSecond2 = res["result-second"]["decimal-best"][2];
+      timeSecond = res["result-second"].time;
+      valueBestSecond = res["result-second"]["value-best"];
+    }
+
+    let imgArray = [
+      img3d,
+      imgcontour,
+      err1,
+      err2,
+      err3
+    ]
+
     listMethod.push({
       hours: novaHora(),
       date: novaData(),
-      name: "Ackley N. 2 Function",
-      method: res,
+      name: problem,
+      description: descriptionProblem,
+      img3d,
+      imgcontour,
+      err1,
+      err2,
+      err3,
+      decimalBestFirst1,
+      decimalBestFirst2,
+      decimalBestSecond1,
+      decimalBestSecond2,
+      timeFirst,
+      timeSecond,
+      valueBestFirst,
+      valueBestSecond,
+      isHybrid,
+      imgArray
     });
-    console.log(listMethod)
+    console.log(listMethod);
   }
 
   useEffect(() => {
@@ -64,6 +118,7 @@ export const ResultMethodProvider = ({ children }) => {
 
     switch (task) {
       case "functions_solver_results":
+        console.log(response);
         newListMethod(response.data);
         setStoregeMethods(listMethod);
         break;
@@ -72,10 +127,6 @@ export const ResultMethodProvider = ({ children }) => {
         break;
     }
   }, [response]);
-
-  useEffect(() => {
-    console.log("res")
-  }, [setStoregeMethods])
 
   return (
     <ResultMethodContext.Provider value={{ listMethod, storegeMethods }}>

@@ -107,15 +107,16 @@ export const RecentInfo = styled.div`
 export const RecentImgs = styled.div`
   margin: 20px 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
 
   div {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   div img {
-    width: 100%;
+    width: 50%;
   }
 `;
 

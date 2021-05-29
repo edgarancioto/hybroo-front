@@ -15,7 +15,7 @@ import {
   WrapperButtons,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
-import { ResultMethodContext } from "../../context/useResultMethod"
+import { ResultMethodContext } from "../../context/useResultMethod";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Switch from "react-switch";
@@ -215,11 +215,14 @@ function FunctionsProblems() {
         setOptionsMethods(methods);
         break;
 
+      case "functions_solver_results":
+        console.log(response);
+        break;
+
       default:
         break;
     }
   }, [response]);
-
 
   return (
     <>
