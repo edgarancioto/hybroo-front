@@ -13,7 +13,7 @@ export const ResultMethodContext = createContext(initialValue);
 export const ResultMethodProvider = ({ children }) => {
   const { response } = useContext(WebsocketsContext);
 
-  const [listMethod ] = useState([]);
+  const [listMethod, setListMethod ] = useState([]);
   //const [storegeMethods, setStoregeMethods] = usePersistedState("methods", []);
   //const [resultMethod, setResultMethod] = useState(storegeMethods);
 
@@ -50,6 +50,9 @@ export const ResultMethodProvider = ({ children }) => {
   }
 
   function newListMethod(res) {
+    let newListMethod = [];
+    newListMethod.push(...listMethod)
+
     let img3d = res["3d"];
     let imgcontour = res.contour;
     let err1 = res.err1;
@@ -89,7 +92,7 @@ export const ResultMethodProvider = ({ children }) => {
       err3
     ]
 
-    listMethod.push({
+    newListMethod.push({
       hours: novaHora(),
       date: novaData(),
       name: problem,
@@ -110,6 +113,8 @@ export const ResultMethodProvider = ({ children }) => {
       isHybrid,
       imgArray
     });
+
+    setListMethod(newListMethod);
   }
 
   useEffect(() => {
