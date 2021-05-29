@@ -12,11 +12,11 @@ function Sidebar(props) {
   return (
     <Container>
       <Header>
-        <img src={logoHybroo} alt="Logo" />
+      <Link to="/"><img src={logoHybroo} alt="Logo" /> </Link>
       </Header>
       <Wrapper>
         <ul>
-          <Link to="/dashboard-home">
+          <Link to="/">
             <li className={ page === "dashboard-home" ? "active" : ""}>
               <VideoLibraryRoundedIcon />
               Home

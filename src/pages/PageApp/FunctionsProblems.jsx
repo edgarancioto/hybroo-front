@@ -32,8 +32,6 @@ function FunctionsProblems() {
   const [checkHybrid, setCheckHybrid] = useState(false);
   const [numDimension, setNumDimension] = useState(1);
   const [numberDimension, setNumberDimension] = useState({ value: 1 });
-  //const [collectionData, setCollectionData] = useState({});
-  //const [resultRequest, setResultRequest] = useState({});
 
   const { sendMessage, response } = useContext(WebsocketsContext);
   const { resultMethod } = useContext(ResultMethodContext);

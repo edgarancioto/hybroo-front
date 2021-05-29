@@ -13,7 +13,7 @@ export const ResultMethodContext = createContext(initialValue);
 export const ResultMethodProvider = ({ children }) => {
   const { response } = useContext(WebsocketsContext);
 
-  const [listMethod, setListMethod] = useState([]);
+  const [listMethod] = useState([]);
   const [storegeMethods, setStoregeMethods] = usePersistedState("methods", []);
   //const [resultMethod, setResultMethod] = useState(storegeMethods);
 
