@@ -195,11 +195,11 @@ export const SubimitButton = styled.button`
   background-color: #f78e20;
   color: #fff;
 
-  padding:20px 40px;
+  padding: 20px 40px;
   cursor: pointer;
 
   transition: ease-in-out 0.3s;
-  
+
   :hover {
     background-color: #f47f09;
   }
@@ -207,5 +207,28 @@ export const SubimitButton = styled.button`
     border: none;
     outline: none;
   }
+`;
 
+export const StartRequest = styled.div`
+  button {
+    border: 1px solid;
+    border-color: #f78e20;
+    background-color: #fff;
+    color: #f78e20;
+
+    padding: 5px;
+    cursor: pointer;
+
+    transition: ease-in-out 0.3s;
+
+    :hover {
+      border-color: #f78e20;
+      background-color: #f78e20;
+      color: #fff;
+    }
+    :focus {
+      border: none;
+      outline: none;
+    }
+  }
 `;

@@ -13,12 +13,13 @@ import {
   FieldsSecondMethod,
   SubimitButton,
   WrapperButtons,
+  StartRequest,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
-import { ResultMethodContext } from "../../context/useResultMethod";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Switch from "react-switch";
+import { Link } from "react-router-dom";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
@@ -32,9 +33,10 @@ function FunctionsProblems() {
   const [checkHybrid, setCheckHybrid] = useState(false);
   const [numDimension, setNumDimension] = useState(1);
   const [numberDimension, setNumberDimension] = useState({ value: 1 });
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isResult, setIsResult] = useState(false);
 
   const { sendMessage, response } = useContext(WebsocketsContext);
-  const { resultMethod } = useContext(ResultMethodContext);
 
   const MyComponent = () => (
     <Select
@@ -143,6 +145,10 @@ function FunctionsProblems() {
         params: { collectionData },
       })
     );
+
+    if(selectFirstMethod.length > 0 ) {
+      setIsSubmit(true);
+    }
   }
 
   function handleSecondMethodFields(event) {
@@ -171,6 +177,16 @@ function FunctionsProblems() {
 
     setSelectFirstMethod([]);
     setSelectSecondMethod([]);
+  }
+
+  function newRequestProblem() {
+    getMethods();
+    setIsDisabled(!isDisabled);
+    setSelectFirstMethod([]);
+    setSelectSecondMethod([]);
+
+    setIsResult(false);
+    setIsSubmit(false);
   }
 
   useEffect(() => {
@@ -214,7 +230,7 @@ function FunctionsProblems() {
         break;
 
       case "functions_solver_results":
-        console.log(response);
+        setIsResult(true);
         break;
 
       default:
@@ -376,9 +392,24 @@ function FunctionsProblems() {
             </OptionsContent>
           </FunctionContent>
           <WrapperButtons>
-            <SubimitButton onClick={() => submitCollectionData()}>
-              Submit Function
-            </SubimitButton>
+            {!isSubmit ? (
+              <SubimitButton onClick={() => submitCollectionData()}>
+                Submit Function
+              </SubimitButton>
+            ) : !isResult ? (
+              <StartRequest>
+                <span>Start new execution... </span>
+                <strong>This may take a few minutes</strong>
+              </StartRequest>
+            ) : (
+              <StartRequest>
+                <span>Finishing the execution... </span>
+                <Link to="/recent">
+                  <strong>  Show request</strong>
+                </Link>
+                <button onClick={ () => newRequestProblem()}>New Request</button>
+              </StartRequest>
+            )}
           </WrapperButtons>
         </FunctionContainer>
       ) : null}

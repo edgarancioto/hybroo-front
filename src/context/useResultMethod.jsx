@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState, useContext } from "react";
 import { WebsocketsContext } from "../context/useWebsockets";
-import usePersistedState from "../helpers/usePersistedState";
+//import usePersistedState from "../helpers/usePersistedState";
 
 const initialValue = {
   resultMethod: {},
@@ -13,8 +13,8 @@ export const ResultMethodContext = createContext(initialValue);
 export const ResultMethodProvider = ({ children }) => {
   const { response } = useContext(WebsocketsContext);
 
-  const [listMethod] = useState([]);
-  const [storegeMethods, setStoregeMethods] = usePersistedState("methods", []);
+  const [listMethod ] = useState([]);
+  //const [storegeMethods, setStoregeMethods] = usePersistedState("methods", []);
   //const [resultMethod, setResultMethod] = useState(storegeMethods);
 
   function novaHora() {
@@ -110,7 +110,6 @@ export const ResultMethodProvider = ({ children }) => {
       isHybrid,
       imgArray
     });
-    console.log(listMethod);
   }
 
   useEffect(() => {
@@ -118,9 +117,7 @@ export const ResultMethodProvider = ({ children }) => {
 
     switch (task) {
       case "functions_solver_results":
-        console.log(response);
         newListMethod(response.data);
-        setStoregeMethods(listMethod);
         break;
 
       default:
@@ -129,7 +126,7 @@ export const ResultMethodProvider = ({ children }) => {
   }, [response]);
 
   return (
-    <ResultMethodContext.Provider value={{ listMethod, storegeMethods }}>
+    <ResultMethodContext.Provider value={{ listMethod }}>
       {children}
     </ResultMethodContext.Provider>
   );

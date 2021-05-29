@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoHybroo from "../../assets/img/logo-hybroo.png";
 
@@ -9,10 +9,16 @@ import {
   MenuUser,
 } from "./styles";
 import { Button, Menu, MenuItem } from "@material-ui/core";
+import { WebsocketsContext } from "../../context/useWebsockets";
+
+
 
 export default function NavBar() {
 
   const [notification, setNotification] = React.useState(null);
+  const [listNotification, setlistNotification] = useState([]);
+
+  const { response } = useContext(WebsocketsContext);
 
   const handleClickNotification = (event) => {
     setNotification(event.currentTarget);
@@ -21,6 +27,19 @@ export default function NavBar() {
   const handleCloseNotification = () => {
     setNotification(null);
   };
+
+  useEffect(() => {
+    const task = response.task;
+
+    switch (task) {
+      case "functions_solver_results":
+        
+        break;
+
+      default:
+        break;
+    }
+  }, [response]);
 
   return (
     <Container>
@@ -45,8 +64,9 @@ export default function NavBar() {
           keepMounted
           open={Boolean(notification)}
           onClose={handleCloseNotification}
+          
         >
-          <MenuItem>example of a notification</MenuItem>
+          <MenuItem>empty</MenuItem>
         </Menu>
 
       </MenuUser>
