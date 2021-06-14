@@ -155,13 +155,6 @@ export default function Home() {
         </div>
       </footer>
 
-      <div id="preloader">
-        <div className="spinner">
-          <div className="bounce1" />
-          <div className="bounce2" />
-          <div className="bounce3" />
-        </div>
-      </div>
     </div>
   );
 }

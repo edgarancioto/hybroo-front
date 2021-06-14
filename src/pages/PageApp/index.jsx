@@ -22,13 +22,15 @@ export default function PageApp() {
     setSelectApplications(event);
   };
 
-  function getNamesFunction() {
+  function getNamesFunction(name) {
     const functionName = JSON.stringify({
-      task: "functions_names",
+      task: name,
       params: "None",
     });
     sendMessage(functionName);
   }
+
+  
 
   return (
     <div>
@@ -41,7 +43,7 @@ export default function PageApp() {
           <Card
             onClick={() => {
               handleSelected(0);
-              getNamesFunction();
+              getNamesFunction("functions_names");
             }}
             className={selectApplications === 0 ? "select" : "card"}
           >
@@ -50,7 +52,10 @@ export default function PageApp() {
           </Card>
 
           <Card
-            onClick={() => handleSelected(1)}
+            onClick={() => {
+              handleSelected(1);
+              getNamesFunction("instances_names");
+            }}
             className={selectApplications === 1 ? "select" : "card"}
           >
             <FunctionsOutlinedIcon />

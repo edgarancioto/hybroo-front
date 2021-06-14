@@ -38,7 +38,7 @@ function FunctionsProblems() {
 
   const { sendMessage, response } = useContext(WebsocketsContext);
 
-  const MyComponent = () => (
+  const SelectFunction = () => (
     <Select
       options={selectData}
       isDisabled={isDisabled}
@@ -177,6 +177,7 @@ function FunctionsProblems() {
 
     setSelectFirstMethod([]);
     setSelectSecondMethod([]);
+    setIsSubmit(false);
   }
 
   function newRequestProblem() {
@@ -242,7 +243,7 @@ function FunctionsProblems() {
     <>
       <FunctionContainer>
         <FunctionTittle>Select Function</FunctionTittle>
-        <FunctionContent>{MyComponent()}</FunctionContent>
+        <FunctionContent>{SelectFunction()}</FunctionContent>
 
         <ul>
           {selectInfo.map((info) => {
