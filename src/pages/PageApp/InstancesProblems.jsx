@@ -12,7 +12,7 @@ function InstanceProblems() {
   const [selectIntance, setSelectIntance] = useState([]);
   const [selectOptionsIntance, setSelectOptionsIntance] = useState([]);
   const [selectOptions, setSelectOptions] = useState();
-  const [selectInfo, setSelectInfo] = useState([]);
+  const [selectProblem, setSelectProblem] = useState();
   const [selectFirstMethod, setSelectFirstMethod] = useState([]);
   const [selectSecondMethod, setSelectSecondMethod] = useState([]);
   const [optionsMethods, setOptionsMethods] = useState([]);
@@ -83,7 +83,7 @@ function InstanceProblems() {
   function handleChangeOptions(event) {
     getMethods();
     setSelectOptions(true);
-    console.log(event);
+    setSelectProblem(event.label);
   }
 
   function jsonToArray(obj) {
@@ -117,15 +117,15 @@ function InstanceProblems() {
         ? document.getElementById("option_second").value
         : "0";
 
-    var fieldsFirtsMethod = [{ label: "first-method", value: optionSingle }];
-    var fieldsSecondMethod = [{ label: "second-method", value: optionSecond }];
+    var fieldsFirtsMethod = [{ "name-method": optionSingle }];
+    var fieldsSecondMethod = [{ "name-method": optionSecond }];
 
     if (selectFirstMethod.length > 0) {
       selectFirstMethod.forEach((item, index) => {
         var inputValue = document.getElementById("firstMethod" + index);
         let label = item.label.split(" ")[0];
         let value = inputValue.value;
-        let element = { label, value };
+        let element = { [label]: value };
         fieldsFirtsMethod.push(element);
       });
     }
@@ -136,15 +136,15 @@ function InstanceProblems() {
           var inputValue = document.getElementById("secondMethod" + index);
           let label = item.label.split(" ")[0];
           let value = inputValue.value;
-          let element = { label, value };
+          let element = { [label] : value };
           fieldsSecondMethod.push(element);
         });
       }
     }
 
     let collectionData = {
-      //problem: selectInfo[0][1].toString(),
-      
+      problem: selectProblem,
+      dimension: "2",
       isHybrid: checkHybrid,
       firstMethod: fieldsFirtsMethod,
       secondMethod: fieldsSecondMethod,
@@ -211,7 +211,6 @@ function InstanceProblems() {
         break;
     }
 
-    console.log(response);
   }, [response]);
 
   return (

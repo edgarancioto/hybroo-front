@@ -106,15 +106,15 @@ function FunctionsProblems() {
         ? document.getElementById("option_second").value
         : "0";
 
-    var fieldsFirtsMethod = [{ label: "first-method", value: optionSingle }];
-    var fieldsSecondMethod = [{ label: "second-method", value: optionSecond }];
+    var fieldsFirtsMethod = [{  "name-method": optionSingle }];
+    var fieldsSecondMethod = [{  "name-method": optionSecond }];
 
     if (selectFirstMethod.length > 0) {
       selectFirstMethod.forEach((item, index) => {
         var inputValue = document.getElementById("firstMethod" + index);
         let label = item.label.split(" ")[0];
         let value = inputValue.value;
-        let element = { label, value };
+        let element = { [label]: value };
         fieldsFirtsMethod.push(element);
       });
     }
@@ -125,7 +125,7 @@ function FunctionsProblems() {
           var inputValue = document.getElementById("secondMethod" + index);
           let label = item.label.split(" ")[0];
           let value = inputValue.value;
-          let element = { label, value };
+          let element = { [label]: value };
           fieldsSecondMethod.push(element);
         });
       }
