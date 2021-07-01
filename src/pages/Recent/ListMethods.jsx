@@ -18,7 +18,6 @@ export default function ListMethods() {
   return (
     <>
       {listMethod.map((item, index) => {
-
         return (
           <S.RecentContainer>
             <S.RecentTittle onClick={() => handleChange(index)}>
@@ -58,14 +57,25 @@ export default function ListMethods() {
                     );
                   })}
                 </S.RecentImgs>
-                <h3>Description Problem</h3>
-                <S.RecentInfo>
-                  <span>{item.description}</span>
-                </S.RecentInfo>
+
+                {item.description !== "" ? (
+                  <>
+                    <h3>Description Problem</h3>
+                    <S.RecentInfo>
+                      <span>{item.description}</span>
+                    </S.RecentInfo>
+                  </>
+                ) : null}
+                
                 <h3>Result First Method</h3>
                 <S.RecentInfo>
-                  <strong>Decimal Best: </strong>[<span>{item.decimalBestFirst1}</span>] , [
-                  <span>{item.decimalBestFirst2}</span>]
+                  {item.decimalBestFirst1 !== "" ? (
+                    <>
+                      <strong>Decimal Best: </strong>[
+                      <span>{item.decimalBestFirst1}</span>] , [
+                      <span>{item.decimalBestFirst2}</span>]{" "}
+                    </>
+                  ) : null}
                 </S.RecentInfo>
                 <S.RecentInfo>
                   <strong>Time: </strong>
@@ -75,12 +85,13 @@ export default function ListMethods() {
                   <strong>Value Best: </strong>
                   <span>{item.valueBestFirst}</span>
                 </S.RecentInfo>
-                
+
                 {item.isHybrid ? (
                   <>
                     <h3>Result Second Method</h3>
                     <S.RecentInfo>
-                      <strong>Decimal Best: </strong>[<span>{item.decimalBestSecond1}</span>] , [
+                      <strong>Decimal Best: </strong>[
+                      <span>{item.decimalBestSecond1}</span>] , [
                       <span>{item.decimalBestSecond1}</span>]
                     </S.RecentInfo>
                     <S.RecentInfo>

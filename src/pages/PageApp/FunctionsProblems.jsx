@@ -106,16 +106,15 @@ function FunctionsProblems() {
         ? document.getElementById("option_second").value
         : "0";
 
-    var fieldsFirtsMethod = [{  "name-method": optionSingle }];
-    var fieldsSecondMethod = [{  "name-method": optionSecond }];
+    var fieldsFirtsMethod = {  "name-method": optionSingle };
+    var fieldsSecondMethod = {  "name-method": optionSecond };
 
     if (selectFirstMethod.length > 0) {
       selectFirstMethod.forEach((item, index) => {
         var inputValue = document.getElementById("firstMethod" + index);
         let label = item.label.split(" ")[0];
         let value = inputValue.value;
-        let element = { [label]: value };
-        fieldsFirtsMethod.push(element);
+        fieldsFirtsMethod[label] =  value ;
       });
     }
 
@@ -125,8 +124,7 @@ function FunctionsProblems() {
           var inputValue = document.getElementById("secondMethod" + index);
           let label = item.label.split(" ")[0];
           let value = inputValue.value;
-          let element = { [label]: value };
-          fieldsSecondMethod.push(element);
+          fieldsSecondMethod[label] =  value ;
         });
       }
     }
@@ -135,8 +133,8 @@ function FunctionsProblems() {
       problem: selectInfo[0][1].toString(),
       dimension: numDimension.toString(),
       isHybrid: checkHybrid,
-      firstMethod: fieldsFirtsMethod,
-      secondMethod: fieldsSecondMethod,
+      firstMethod: {...fieldsFirtsMethod},
+      secondMethod: {...fieldsSecondMethod},
     };
 
     sendMessage(

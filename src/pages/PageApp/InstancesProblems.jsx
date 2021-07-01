@@ -117,16 +117,15 @@ function InstanceProblems() {
         ? document.getElementById("option_second").value
         : "0";
 
-    var fieldsFirtsMethod = [{ "name-method": optionSingle }];
-    var fieldsSecondMethod = [{ "name-method": optionSecond }];
+    var fieldsFirtsMethod = { "name-method": optionSingle };
+    var fieldsSecondMethod = { "name-method": optionSecond };
 
     if (selectFirstMethod.length > 0) {
       selectFirstMethod.forEach((item, index) => {
         var inputValue = document.getElementById("firstMethod" + index);
         let label = item.label.split(" ")[0];
         let value = inputValue.value;
-        let element = { [label]: value };
-        fieldsFirtsMethod.push(element);
+        fieldsFirtsMethod[label] =  value;
       });
     }
 
@@ -136,8 +135,7 @@ function InstanceProblems() {
           var inputValue = document.getElementById("secondMethod" + index);
           let label = item.label.split(" ")[0];
           let value = inputValue.value;
-          let element = { [label] : value };
-          fieldsSecondMethod.push(element);
+          fieldsSecondMethod[label] =  value ;
         });
       }
     }
@@ -146,8 +144,8 @@ function InstanceProblems() {
       problem: selectProblem,
       dimension: "2",
       isHybrid: checkHybrid,
-      firstMethod: fieldsFirtsMethod,
-      secondMethod: fieldsSecondMethod,
+      firstMethod: {...fieldsFirtsMethod},
+      secondMethod: {...fieldsSecondMethod},
     };
 
     sendMessage(
@@ -205,6 +203,7 @@ function InstanceProblems() {
 
       case "instances_solver_results":
         setIsResult(true);
+        console.log(response);
         break;
 
       default:
@@ -318,6 +317,24 @@ function InstanceProblems() {
 
                     <S.FieldsSecondMethod id="group-first-method">
                       {selectSecondMethod.map((item, index) => {
+                        if(item.type === "checkbox") {
+                          console.log("teste")
+                          return (
+                            <>
+                              <label>{item.label}</label>
+                              <input
+                                type={item.type}
+                                name={item.label}
+                                step={item.step}
+                                defaultValue={item.default}
+                                min={item.min}
+                                class="form-control"
+                                id={"secondMethod" + index}
+                                onChange={(e) => console.log(e)}
+                              />
+                            </>
+                          );
+                        }
                         return (
                           <>
                             <label>{item.label}</label>

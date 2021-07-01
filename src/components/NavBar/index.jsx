@@ -40,6 +40,10 @@ export default function NavBar() {
         setIsNotification(true);
         break;
 
+      case "instances_solver_results":
+        setIsNotification(true);
+        break;
+
       default:
         break;
     }
@@ -55,7 +59,6 @@ export default function NavBar() {
     });
 
     setlistNotification(newList);
-
   }, [listMethod]);
 
   return (

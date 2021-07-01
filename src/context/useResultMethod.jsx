@@ -13,7 +13,7 @@ export const ResultMethodContext = createContext(initialValue);
 export const ResultMethodProvider = ({ children }) => {
   const { response } = useContext(WebsocketsContext);
 
-  const [listMethod, setListMethod ] = useState([]);
+  const [listMethod, setListMethod] = useState([]);
   //const [storegeMethods, setStoregeMethods] = usePersistedState("methods", []);
   //const [resultMethod, setResultMethod] = useState(storegeMethods);
 
@@ -51,7 +51,7 @@ export const ResultMethodProvider = ({ children }) => {
 
   function newListMethod(res) {
     let newListMethod = [];
-    newListMethod.push(...listMethod)
+    newListMethod.push(...listMethod);
 
     let img3d = res["3d"];
     let imgcontour = res.contour;
@@ -84,13 +84,7 @@ export const ResultMethodProvider = ({ children }) => {
       valueBestSecond = res["result-second"]["value-best"];
     }
 
-    let imgArray = [
-      img3d,
-      imgcontour,
-      err1,
-      err2,
-      err3
-    ]
+    let imgArray = [img3d, imgcontour, err1, err2, err3];
 
     newListMethod.push({
       hours: novaHora(),
@@ -111,7 +105,58 @@ export const ResultMethodProvider = ({ children }) => {
       valueBestFirst,
       valueBestSecond,
       isHybrid,
-      imgArray
+      imgArray,
+    });
+
+    setListMethod(newListMethod);
+  }
+
+  function newListMethodInstance(res) {
+    let newListMethod = [];
+    newListMethod.push(...listMethod);
+
+    let problem = res.problem;
+    let descriptionProblem = "";
+    let isHybrid = res.isHybrid;
+
+    //result first
+    let decimalBestFirst1 = ""
+    let decimalBestFirst2 = ""
+    let timeFirst = res["result-first"].time;
+    let valueBestFirst = res["result-first"]["value-best"];
+
+    //result second
+    let decimalBestSecond1 = "";
+    let decimalBestSecond2 = "";
+    let timeSecond = "";
+    let valueBestSecond = "";
+
+    if (isHybrid) {
+
+      decimalBestSecond1 = ""
+      decimalBestSecond2 = ""
+      timeSecond = res["result-second"].time;
+      valueBestSecond = res["result-second"]["value-best"];
+    }
+
+    let imgArray = res.images;
+
+    newListMethod.push({
+      hours: novaHora(),
+      date: novaData(),
+      name: problem,
+      description: descriptionProblem,
+  
+      decimalBestFirst1,
+      decimalBestFirst2,
+      decimalBestSecond1,
+      decimalBestSecond2,
+      timeFirst,
+      timeSecond,
+      valueBestFirst,
+      valueBestSecond,
+      isHybrid,
+      imgArray,
     });
 
     setListMethod(newListMethod);
@@ -123,6 +168,10 @@ export const ResultMethodProvider = ({ children }) => {
     switch (task) {
       case "functions_solver_results":
         newListMethod(response.data);
+        break;
+
+      case "instances_solver_results":
+        newListMethodInstance(response.data);
         break;
 
       default:
