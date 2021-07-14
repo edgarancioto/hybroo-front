@@ -14,6 +14,7 @@ import {
   SubimitButton,
   WrapperButtons,
   StartRequest,
+  SimulationStyles,
 } from "./styles";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import AddBoxIcon from "@material-ui/icons/AddBox";
@@ -31,7 +32,9 @@ function FunctionsProblems() {
   const [optionsMethods, setOptionsMethods] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
   const [checkHybrid, setCheckHybrid] = useState(false);
+  const [checkSimulation, setCheckSimulation] = useState(false);
   const [numDimension, setNumDimension] = useState(1);
+  const [numSimulation, setNumSimulation] = useState(1);
   const [numberDimension, setNumberDimension] = useState({ value: 1 });
   const [isSubmit, setIsSubmit] = useState(false);
   const [isResult, setIsResult] = useState(false);
@@ -77,10 +80,18 @@ function FunctionsProblems() {
   function handleCheckHybrid() {
     setCheckHybrid(!checkHybrid);
   }
+  function handleCheckSimulation() {
+    setCheckSimulation(!checkSimulation);
+  }
 
   function handleInputNumber(event) {
     const { value } = event.target;
     setNumDimension(value);
+  }
+
+  function handleInputSimulation(event) {
+    const { value } = event.target;
+    setNumSimulation(value);
   }
 
   function handleFirstMethodFields(event) {
@@ -106,15 +117,15 @@ function FunctionsProblems() {
         ? document.getElementById("option_second").value
         : "0";
 
-    var fieldsFirtsMethod = {  "name-method": optionSingle };
-    var fieldsSecondMethod = {  "name-method": optionSecond };
+    var fieldsFirtsMethod = { "name-method": optionSingle };
+    var fieldsSecondMethod = { "name-method": optionSecond };
 
     if (selectFirstMethod.length > 0) {
       selectFirstMethod.forEach((item, index) => {
         var inputValue = document.getElementById("firstMethod" + index);
         let label = item.label.split(" ")[0];
         let value = inputValue.value;
-        fieldsFirtsMethod[label] =  value ;
+        fieldsFirtsMethod[label] = value;
       });
     }
 
@@ -124,7 +135,7 @@ function FunctionsProblems() {
           var inputValue = document.getElementById("secondMethod" + index);
           let label = item.label.split(" ")[0];
           let value = inputValue.value;
-          fieldsSecondMethod[label] =  value ;
+          fieldsSecondMethod[label] = value;
         });
       }
     }
@@ -133,8 +144,9 @@ function FunctionsProblems() {
       problem: selectInfo[0][1].toString(),
       dimension: numDimension.toString(),
       isHybrid: checkHybrid,
-      firstMethod: {...fieldsFirtsMethod},
-      secondMethod: {...fieldsSecondMethod},
+      simulation: checkSimulation ? numSimulation.toString() : "0",
+      firstMethod: { ...fieldsFirtsMethod },
+      secondMethod: { ...fieldsSecondMethod },
     };
 
     sendMessage(
@@ -144,7 +156,7 @@ function FunctionsProblems() {
       })
     );
 
-    if(selectFirstMethod.length > 0 ) {
+    if (selectFirstMethod.length > 0) {
       setIsSubmit(true);
     }
   }
@@ -390,6 +402,36 @@ function FunctionsProblems() {
               </div>
             </OptionsContent>
           </FunctionContent>
+
+          <SimulationStyles>
+            <div>
+              <ButtonSwitch>
+                <Switch
+                  onChange={() => handleCheckSimulation()}
+                  checked={checkSimulation}
+                  height={20}
+                  width={40}
+                  offColor="#eee"
+                  onColor="#eee"
+                  onHandleColor="#208ccc"
+                  offHandleColor="#208ccc"s
+                />
+                <span>Simulation</span>
+              </ButtonSwitch>
+
+              <input
+                type="number"
+                id="simulation"
+                name="simulation"
+                class="form-control"
+                step={1}
+                value={numSimulation}
+                disabled={!checkSimulation}
+                onChange={(e) => handleInputSimulation(e)}
+              />
+            </div>
+          </SimulationStyles>
+
           <WrapperButtons>
             {!isSubmit ? (
               <SubimitButton onClick={() => submitCollectionData()}>
@@ -404,9 +446,9 @@ function FunctionsProblems() {
               <StartRequest>
                 <span>Finishing the execution... </span>
                 <Link to="/recent">
-                  <strong>  Show request</strong>
+                  <strong> Show request</strong>
                 </Link>
-                <button onClick={ () => newRequestProblem()}>New Request</button>
+                <button onClick={() => newRequestProblem()}>New Request</button>
               </StartRequest>
             )}
           </WrapperButtons>

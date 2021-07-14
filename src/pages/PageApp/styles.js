@@ -232,3 +232,15 @@ export const StartRequest = styled.div`
     }
   }
 `;
+
+export const SimulationStyles = styled.div`
+  display: flex;
+  justify-content: start;
+  padding: 15px;
+  width: 100%;
+
+  div span {
+    margin-left: 8px;
+    margin-top: -2px;
+  }
+`;

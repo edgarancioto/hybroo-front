@@ -17,6 +17,8 @@ function InstanceProblems() {
   const [selectSecondMethod, setSelectSecondMethod] = useState([]);
   const [optionsMethods, setOptionsMethods] = useState([]);
   const [checkHybrid, setCheckHybrid] = useState(false);
+  const [checkSimulation, setCheckSimulation] = useState(false);
+  const [numSimulation, setNumSimulation] = useState(1);
   const [isSubmit, setIsSubmit] = useState(false);
   const [isResult, setIsResult] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -107,6 +109,15 @@ function InstanceProblems() {
     setCheckHybrid(!checkHybrid);
   }
 
+  function handleCheckSimulation() {
+    setCheckSimulation(!checkSimulation);
+  }
+
+  function handleInputSimulation(event) {
+    const { value } = event.target;
+    setNumSimulation(value);
+  }
+
   function submitCollectionData() {
     var optionSingle =
       document.getElementById("option_single") !== null
@@ -144,6 +155,7 @@ function InstanceProblems() {
       problem: selectProblem,
       dimension: "2",
       isHybrid: checkHybrid,
+      simulation: checkSimulation ? numSimulation.toString() : "0",
       firstMethod: {...fieldsFirtsMethod},
       secondMethod: {...fieldsSecondMethod},
     };
@@ -356,6 +368,36 @@ function InstanceProblems() {
               </div>
             </S.OptionsContent>
           </S.FunctionContent>
+
+          <S.SimulationStyles>
+            <div>
+              <S.ButtonSwitch>
+                <Switch
+                  onChange={() => handleCheckSimulation()}
+                  checked={checkSimulation}
+                  height={20}
+                  width={40}
+                  offColor="#eee"
+                  onColor="#eee"
+                  onHandleColor="#208ccc"
+                  offHandleColor="#208ccc"s
+                />
+                <span>Simulation</span>
+              </S.ButtonSwitch>
+
+              <input
+                type="number"
+                id="simulation"
+                name="simulation"
+                class="form-control"
+                step={1}
+                value={numSimulation}
+                disabled={!checkSimulation}
+                onChange={(e) => handleInputSimulation(e)}
+              />
+            </div>
+          </S.SimulationStyles>
+
           <S.WrapperButtons>
             {!isSubmit ? (
               <S.SubimitButton onClick={() => submitCollectionData()}>
