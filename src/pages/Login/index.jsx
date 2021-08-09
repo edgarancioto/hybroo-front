@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import firebase from "../../auth/config";
 import * as S from "./styles";
 import InputText from "../../components/InputText";
@@ -87,6 +87,9 @@ export default function Login() {
           <SubmitButton onClick={() => HandleSubmit()} width="100%">
             Entrar
           </SubmitButton>
+          <span>
+            <Link to="/register">registrar-se</Link>
+          </span>
         </S.ContainerButtons>
       </S.ContentForm>
     </S.Container>

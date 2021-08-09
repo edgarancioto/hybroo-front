@@ -45,6 +45,15 @@ export const ContentLogo = styled.div`
 export const ContainerButtons = styled.div`
   width: 100%;
   margin: 15px 0;
+  text-align: center;
+
+  button {
+    margin-bottom: 14px;
+  }
+  span {
+    font-size: 18px;
+  }
+  
 `;
 
 export const Label = styled.span`

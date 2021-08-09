@@ -54,10 +54,10 @@ function Register() {
   }
 
   const handlerSignUp = async () => {
-    console.log(values.email, values.password);
     try {
       await firebase
         .auth()
+
         .createUserWithEmailAndPassword(values.email, values.password);
       history.push("/applications");
     } catch (error) {
@@ -65,6 +65,13 @@ function Register() {
       alert(
         "Algo deu errado. Coloque um email válido com um senha com mais de 6 digitos, e tente novamente!"
       );
+    }
+
+    let userName = firebase.auth().currentUser;
+    if (!!userName) {
+      userName.updateProfile({
+        displayName: values.name,
+      });
     }
   };
 

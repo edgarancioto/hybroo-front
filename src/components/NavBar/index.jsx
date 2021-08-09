@@ -19,15 +19,24 @@ import {
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import { ResultMethodContext } from "../../context/useResultMethod";
+import { AuthContext } from "../../context/useAuthContext";
 
 export default function NavBar() {
-  const [user, setUser] = React.useState(null);
+  const [userNav, setUserNav] = React.useState(null);
+  //const [user, setUser] = React.useState(null);
   const [notification, setNotification] = React.useState(null);
   const [listNotification, setlistNotification] = useState([]);
   const [isNotification, setIsNotification] = useState(false);
 
   const { response } = useContext(WebsocketsContext);
   const { listMethod } = useContext(ResultMethodContext);
+  const { userName } = useContext(AuthContext);
+
+//  // const user = firebase.auth().currentUser;
+
+//   useEffect(()=>{
+//     setUser(firebase.auth().currentUser);
+//   },[])
 
   const handleClickNotification = (event) => {
     setNotification(event.currentTarget);
@@ -39,17 +48,16 @@ export default function NavBar() {
   };
 
   const handleClick = (event) => {
-    setUser(event.currentTarget);
+    setUserNav(event.currentTarget);
   };
   const handleClose = () => {
-    setUser(null);
+    setUserNav(null);
   };
 
   const handleLogOut = () => {
     firebase.auth().signOut();
-    setUser(null);
-  }
-
+    setUserNav(null);
+  };
 
   useEffect(() => {
     const task = response.task;
@@ -135,16 +143,16 @@ export default function NavBar() {
               <img src={avatarIcon} alt="avatar" />
             </Avatar>
             <Info>
-              <span>Usuario</span>
+              <span>{userName}</span>
             </Info>
           </User>
         </Button>
 
         <Menu
           id="simple-menu"
-          anchorEl={user}
+          anchorEl={userNav}
           keepMounted
-          open={Boolean(user)}
+          open={Boolean(userNav)}
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>

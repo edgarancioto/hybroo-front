@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   margin: 8px 0 8px 0;
-  padding: 18px 14px;
+  padding: 14px 14px;
   width: 100%;
   height: auto;
 
@@ -24,10 +24,10 @@ export const Input = styled.input`
 export const Content = styled.div`
   cursor: pointer;
   position: relative;
-  margin: -54px 0px 10px 350px;
+  margin: -49px 0px 10px 365px;
 
   svg {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   @media (max-width: 400px) {
