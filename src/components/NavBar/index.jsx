@@ -2,6 +2,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoHybroo from "../../assets/img/logo-hybroo.png";
+import avatarIcon from "../../assets/img/avatar-img.png";
+import firebase from "../../auth/config";
 
 import {
   Container,
@@ -10,12 +12,16 @@ import {
   MenuUser,
   NotificationIconResult,
   TagNotification,
+  User,
+  Avatar,
+  Info,
 } from "./styles";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import { ResultMethodContext } from "../../context/useResultMethod";
 
 export default function NavBar() {
+  const [user, setUser] = React.useState(null);
   const [notification, setNotification] = React.useState(null);
   const [listNotification, setlistNotification] = useState([]);
   const [isNotification, setIsNotification] = useState(false);
@@ -31,6 +37,19 @@ export default function NavBar() {
   const handleCloseNotification = () => {
     setNotification(null);
   };
+
+  const handleClick = (event) => {
+    setUser(event.currentTarget);
+  };
+  const handleClose = () => {
+    setUser(null);
+  };
+
+  const handleLogOut = () => {
+    firebase.auth().signOut();
+    setUser(null);
+  }
+
 
   useEffect(() => {
     const task = response.task;
@@ -104,6 +123,33 @@ export default function NavBar() {
           ) : (
             <MenuItem>empty</MenuItem>
           )}
+        </Menu>
+
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <User>
+            <Avatar>
+              <img src={avatarIcon} alt="avatar" />
+            </Avatar>
+            <Info>
+              <span>Usuario</span>
+            </Info>
+          </User>
+        </Button>
+
+        <Menu
+          id="simple-menu"
+          anchorEl={user}
+          keepMounted
+          open={Boolean(user)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleLogOut}>Logout</MenuItem>
         </Menu>
       </MenuUser>
     </Container>
