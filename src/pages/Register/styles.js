@@ -10,7 +10,6 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 10px;
   width: 100vw;
-  height: 100vh;
   background-color: gray;
 
   h4 {
@@ -22,15 +21,13 @@ export const Container = styled.div`
 `;
 
 export const ContentForm = styled.div`
-  margin: auto;
-  margin-top: 15px;
+  margin: 15px auto;
   display: flex;
   flex-direction: column;
   padding: 30px;
   border-radius: 8px;
   background-color: #fff;
   width: 468px;
-  height: 495px;
 
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;

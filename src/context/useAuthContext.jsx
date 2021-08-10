@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import firebase from '../auth/config';
+import Loading from '../components/Loading';
 
 const initialState = {
     user: null,
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <React.Fragment>Loading...</React.Fragment>;
+    return <Loading />;
   }
 
   return (
