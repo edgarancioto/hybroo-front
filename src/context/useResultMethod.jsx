@@ -120,8 +120,8 @@ export const ResultMethodProvider = ({ children }) => {
     let isHybrid = res.isHybrid;
 
     //result first
-    let decimalBestFirst1 = ""
-    let decimalBestFirst2 = ""
+    let decimalBestFirst1 = "";
+    let decimalBestFirst2 = "";
     let timeFirst = res["result-first"].time;
     let valueBestFirst = res["result-first"]["value-best"];
 
@@ -132,9 +132,8 @@ export const ResultMethodProvider = ({ children }) => {
     let valueBestSecond = "";
 
     if (isHybrid) {
-
-      decimalBestSecond1 = ""
-      decimalBestSecond2 = ""
+      decimalBestSecond1 = "";
+      decimalBestSecond2 = "";
       timeSecond = res["result-second"].time;
       valueBestSecond = res["result-second"]["value-best"];
     }
@@ -146,7 +145,7 @@ export const ResultMethodProvider = ({ children }) => {
       date: novaData(),
       name: problem,
       description: descriptionProblem,
-  
+
       decimalBestFirst1,
       decimalBestFirst2,
       decimalBestSecond1,
@@ -172,6 +171,11 @@ export const ResultMethodProvider = ({ children }) => {
 
       case "instances_solver_results":
         newListMethodInstance(response.data);
+        break;
+
+      case "simule_functions_results":
+        // newListMethodInstance(response.data);
+        console.log(response.data);
         break;
 
       default:
