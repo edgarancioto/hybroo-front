@@ -149,12 +149,15 @@ function FunctionsProblems() {
       secondMethod: { ...fieldsSecondMethod },
     };
 
+    console.log(collectionData);
+
     sendMessage(
       JSON.stringify({
         task: "functions_solver",
         params: { collectionData },
       })
     );
+
 
     if (selectFirstMethod.length > 0) {
       setIsSubmit(true);
