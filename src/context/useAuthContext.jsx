@@ -4,12 +4,14 @@ import Loading from '../components/Loading';
 
 const initialState = {
     user: null,
-    userName: " "
+    userName: " ",
+    userMail: ""
 }
 export const AuthContext = createContext(initialState);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userMail, setUserMail] = useState("");
   const [userName, setUserName] = useState(" ");
   const [loading, setLoading] = useState(true);
 
@@ -19,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
 
       setUserName(user.displayName);
+      setUserMail(user.email);
     });
   }, []);
 
@@ -27,6 +30,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, userName }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, userName, userMail }}>{children}</AuthContext.Provider>
   );
 };

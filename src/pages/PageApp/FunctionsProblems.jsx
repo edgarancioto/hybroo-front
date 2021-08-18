@@ -21,6 +21,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Switch from "react-switch";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/useAuthContext";
 
 function FunctionsProblems() {
   const [selectData, setSelectData] = useState([]);
@@ -40,6 +41,7 @@ function FunctionsProblems() {
   const [isResult, setIsResult] = useState(false);
 
   const { sendMessage, response } = useContext(WebsocketsContext);
+  const { userMail } = useContext(AuthContext);
 
   const SelectFunction = () => (
     <Select
@@ -147,6 +149,7 @@ function FunctionsProblems() {
       simulation: checkSimulation ? numSimulation.toString() : "0",
       firstMethod: { ...fieldsFirtsMethod },
       secondMethod: { ...fieldsSecondMethod },
+      userMail
     };
 
     console.log(collectionData);
