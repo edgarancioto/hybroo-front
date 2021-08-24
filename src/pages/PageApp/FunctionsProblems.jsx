@@ -246,7 +246,7 @@ function FunctionsProblems() {
         setOptionsMethods(methods);
         break;
 
-      case "functions_solver_results":
+      case "functions_solver":
         setIsResult(true);
         break;
 
@@ -451,7 +451,7 @@ function FunctionsProblems() {
             ) : (
               <StartRequest>
                 <span>Finishing the execution... </span>
-                <Link to="/recent">
+                <Link onClick={() => newRequestProblem()} to="/recent">
                   <strong> Show request</strong>
                 </Link>
                 <button onClick={() => newRequestProblem()}>New Request</button>

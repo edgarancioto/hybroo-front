@@ -167,6 +167,7 @@ export const ResultMethodProvider = ({ children }) => {
     switch (task) {
       case "functions_solver":
         newListMethod(response.data);
+        console.log(response);
         break;
 
       case "instances_solver":

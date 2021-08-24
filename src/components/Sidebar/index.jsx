@@ -19,7 +19,7 @@ function Sidebar(props) {
     const task = response.task;
 
     switch (task) {
-      case "functions_solver_results":
+      case "functions_solver":
         setIsNotification(true);
         break;
 
@@ -31,6 +31,12 @@ function Sidebar(props) {
         break;
     }
   }, [response]);
+
+  useEffect(() => {
+    if(page === "recent") {
+      setIsNotification(false);
+    }
+  }, [page])
 
   const handleSideBar = () => {
     setOpenSideBar(!openSideBar);
