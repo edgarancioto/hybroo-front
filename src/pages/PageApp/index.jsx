@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import { WebsocketsContext } from "../../context/useWebsockets"
-
-import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 import {
   Container,
@@ -35,7 +33,6 @@ export default function PageApp() {
   return (
     <div>
       <Sidebar page="app" />
-      <NavBar />
       <Container>
         <TitleApp>Applications</TitleApp>
 

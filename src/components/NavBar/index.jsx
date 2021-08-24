@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logoHybroo from "../../assets/img/logo-hybroo.png";
 import avatarIcon from "../../assets/img/avatar-img.png";
 import firebase from "../../auth/config";
 
 import {
   Container,
-  Logo,
   NotificationIcon,
   MenuUser,
   NotificationIconResult,
@@ -90,11 +88,11 @@ export default function NavBar() {
 
   return (
     <Container>
-      <Logo>
+      {/* <Logo>
         <Link to="/">
           <img src={logoHybroo} alt="Hybroo" />
         </Link>
-      </Logo>
+      </Logo> */}
 
       <MenuUser>
         <Button

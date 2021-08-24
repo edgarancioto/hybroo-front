@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 import * as S from "./styles";
 import { ResultMethodContext } from "../../context/useResultMethod";
@@ -11,7 +10,6 @@ export default function GettingStarted() {
   return (
     <div>
       <Sidebar page="recent" />
-      <NavBar />
       <S.Container>
         <S.TitleApp>Recent Applications ({listMethod.length})</S.TitleApp>
         <ListMethods />
