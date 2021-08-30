@@ -22,12 +22,12 @@ export default function Login() {
       await firebase
         .auth()
         .signInWithEmailAndPassword(values.email, values.password);
-      history.push('/applications');
+      history.push("/applications");
     } catch (error) {
       console.log(error);
-      alert('Algo deu errado. Coloque sua senha e email e tente novamente');
+      alert("Algo deu errado. Coloque sua senha e email e tente novamente");
     }
-  }
+  };
 
   function onChange(event) {
     const { value, name } = event.target;
@@ -49,11 +49,11 @@ export default function Login() {
   function HandleSubmit() {
     if (values.email === "") {
       setErrorEmail(true);
-      return
+      return;
     }
     if (values.password === "") {
       setErrorPassword(true);
-      return
+      return;
     }
 
     loginHandle();
@@ -83,6 +83,9 @@ export default function Login() {
           password={true}
           helperText={errorPassword ? "Este campo é obrigatório" : ""}
         />
+        <span style={{ marginBottom: "15px" }}>
+          <Link to="/forget-password">esqueci minha senha</Link>
+        </span>
         <S.ContainerButtons>
           <SubmitButton onClick={() => HandleSubmit()} width="100%">
             Entrar
