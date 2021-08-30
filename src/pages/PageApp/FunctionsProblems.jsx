@@ -1,5 +1,5 @@
 /* eslint-disable no-fallthrough */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import Select from "react-select";
 import {
   FunctionContainer,
@@ -24,6 +24,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/useAuthContext";
 
 function FunctionsProblems() {
+  const scrollOption = useRef();
+  const scrollFunction = useRef();
   const [selectData, setSelectData] = useState([]);
   const [selectInfo, setSelectInfo] = useState([]);
   const [selectImage, setSelectImage] = useState([]);
@@ -50,6 +52,10 @@ function FunctionsProblems() {
       onChange={handleChange}
     />
   );
+
+  function scrollB(ref) {
+    ref.current.scrollIntoView({behavior: 'smooth'});
+  }
 
   function getDetails(id) {
     sendMessage(
@@ -78,6 +84,7 @@ function FunctionsProblems() {
   function handleChange(event) {
     getDetails(event.value);
     setSelectOptions(event);
+    scrollB(scrollFunction);
   }
   function handleCheckHybrid() {
     setCheckHybrid(!checkHybrid);
@@ -194,6 +201,9 @@ function FunctionsProblems() {
     setSelectFirstMethod([]);
     setSelectSecondMethod([]);
     setIsSubmit(false);
+
+    if(!isDisabled) scrollB(scrollOption);
+    if(isDisabled) scrollB(scrollFunction);
   }
 
   function newRequestProblem() {
@@ -257,7 +267,7 @@ function FunctionsProblems() {
 
   return (
     <>
-      <FunctionContainer>
+      <FunctionContainer ref={scrollFunction}>
         <FunctionTittle>Select Function</FunctionTittle>
         <FunctionContent>{SelectFunction()}</FunctionContent>
 
@@ -286,16 +296,17 @@ function FunctionsProblems() {
                 </>
               ) : (
                 <>
-                  <AddBoxIcon /> <spam>Confirm</spam>
+                 <AddBoxIcon /> <spam>Confirm</spam>
                 </>
               )}
             </ButtonsCard>
           </ContentButtons>
         ) : null}
       </FunctionContainer>
-
-      {isDisabled ? (
-        <FunctionContainer>
+      
+      
+      {true ? (
+        <FunctionContainer ref={scrollOption}>
           <FunctionTittle>Options</FunctionTittle>
           <FunctionContent>
             <OptionsContent>
@@ -320,6 +331,7 @@ function FunctionsProblems() {
                   name="first-method"
                   id="option_single"
                   onChange={(e) => handleFirstMethodFields(e)}
+                  disabled={!isDisabled}
                 >
                   <option disabled="" selected="" value="0">
                     - select an option -

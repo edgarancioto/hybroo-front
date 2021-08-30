@@ -11,6 +11,8 @@ export const Container = styled.div`
   border-radius: 30px;
 
   background-color: #fff;
+
+  scroll-behavior: smooth;
 `;
 
 export const TitleApp = styled.h3`
@@ -64,10 +66,13 @@ export const FunctionContainer = styled.div`
   max-width: 760px;
   border: 1px solid #dfdfdf;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  transition: ease-in-out 0.4s;
+  //transition: ease-in-out 0.4s;
   margin: 10px;
+  margin-bottom: 20px;
   align-items: center;
   padding-bottom: 20px;
+
+  scroll-behavior: smooth;
 
   :hover {
     border: 1px solid #f78e20;
@@ -100,6 +105,7 @@ export const FunctionTittle = styled.div`
   font-size: 16px;
 `;
 export const FunctionContent = styled.div`
+  scroll-behavior: smooth;
   width: 100%;
   padding: 10px;
 `;

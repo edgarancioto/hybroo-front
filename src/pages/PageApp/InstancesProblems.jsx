@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { WebsocketsContext } from "../../context/useWebsockets";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import * as S from "./styles";
 
 function InstanceProblems() {
+  const scrollOption = useRef();
+  const scrollFunction = useRef();
   const [arrayOptions, setArrayOptions] = useState([]);
   const [selectIntance, setSelectIntance] = useState([]);
   const [selectOptionsIntance, setSelectOptionsIntance] = useState([]);
@@ -32,6 +34,10 @@ function InstanceProblems() {
       onChange={handleChangeInstance}
     />
   );
+
+  function scrollB(ref) {
+    ref.current.scrollIntoView({behavior: 'smooth'});
+  }
 
   const SelectOptionsIntances = () => (
     <Select
@@ -64,6 +70,7 @@ function InstanceProblems() {
     });
 
     setSelectOptionsIntance(dataOptions);
+    scrollB(scrollFunction);
   }
 
   function handleSecondMethodFields(event) {
@@ -179,6 +186,9 @@ function InstanceProblems() {
     setSelectFirstMethod([]);
     setSelectSecondMethod([]);
     setIsSubmit(false);
+
+    if(!isDisabled) scrollB(scrollOption);
+    if(isDisabled) scrollB(scrollFunction);
   }
 
   function newRequestProblem() {
@@ -226,7 +236,7 @@ function InstanceProblems() {
 
   return (
     <>
-      <S.FunctionContainer>
+      <S.FunctionContainer ref={scrollFunction}>
         <S.FunctionTittle>Select Instances problems</S.FunctionTittle>
         <S.FunctionContent>{SelectIntances()}</S.FunctionContent>
 
@@ -249,8 +259,8 @@ function InstanceProblems() {
         ) : null}
       </S.FunctionContainer>
 
-      {isDisabled ? (
-        <S.FunctionContainer>
+      {true ? (
+        <S.FunctionContainer ref={scrollOption}>
           <S.FunctionTittle>Options</S.FunctionTittle>
           <S.FunctionContent>
             <S.OptionsContent>
@@ -262,6 +272,7 @@ function InstanceProblems() {
                   name="first-method"
                   id="option_single"
                   onChange={(e) => handleFirstMethodFields(e)}
+                  disabled={!isDisabled}
                 >
                   <option disabled="" selected="" value="0">
                     - select an option -
