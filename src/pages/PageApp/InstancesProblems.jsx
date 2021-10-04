@@ -11,6 +11,7 @@ function InstanceProblems() {
   const scrollOption = useRef();
   const scrollFunction = useRef();
   const [arrayOptions, setArrayOptions] = useState([]);
+  const [selectLabelInstance, setSelectLabelInstance] = useState("");
   const [selectIntance, setSelectIntance] = useState([]);
   const [selectOptionsIntance, setSelectOptionsIntance] = useState([]);
   const [selectOptions, setSelectOptions] = useState();
@@ -70,6 +71,7 @@ function InstanceProblems() {
     });
 
     setSelectOptionsIntance(dataOptions);
+    setSelectLabelInstance(event.label);
     scrollB(scrollFunction);
   }
 
@@ -220,6 +222,8 @@ function InstanceProblems() {
         break;
       case "instances_methods":
         let methods = jsonToArray(response);
+
+        console.log(methods);
         setOptionsMethods(methods);
         break;
 
@@ -279,6 +283,7 @@ function InstanceProblems() {
                   </option>
                   {optionsMethods.map((item) => {
                     if (item[0] === "task") return null;
+                    if (item[1]["problem-type"] !== selectLabelInstance) return null;
                     return <option value={item[0]}>{item[1].name}</option>;
                   })}
                 </select>
@@ -333,6 +338,7 @@ function InstanceProblems() {
                       </option>
                       {optionsMethods.map((item) => {
                         if (item[0] === "task") return null;
+                        if (item[1]["problem-type"] !== selectLabelInstance) return null;
                         if (item[1].approach !== "HYBRID") return null;
                         return <option value={item[0]}>{item[1].name}</option>;
                       })}
@@ -341,7 +347,7 @@ function InstanceProblems() {
                     <S.FieldsSecondMethod id="group-first-method">
                       {selectSecondMethod.map((item, index) => {
                         if(item.type === "checkbox") {
-                          console.log("teste")
+                          
                           return (
                             <>
                               <label>{item.label}</label>
